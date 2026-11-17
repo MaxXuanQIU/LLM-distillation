@@ -41,6 +41,19 @@ The pilot tests memory and numerical stability. Batch size can be finalized from
 the pilot; evaluation benchmarks are not used for tuning. The final configuration
 is stored both at the repository root and in each run's metadata.
 
+The completed pilots used 4 optimizer steps each. Batch 16 used 10.80 GB for SFT
+and 11.47 GB on the on-policy student GPU. Batch 32 with 128-token loss chunks
+used 13.10 GB for SFT and 14.62 GB on the on-policy student GPU (10.01 GB for its
+teacher). Batch 32 improved examples per second, so the final training microbatch
+and effective batch are both 32, giving 157 steps for 5,000 examples. The learning
+rate remains 1e-5; no benchmark scores were consulted.
+
+A separate memory-only probe forced the teacher to generate the full 2,048 tokens
+on a batch of the 32 longest IFEval prompts. It ran out of memory near the length
+limit, with allocator fragmentation contributing. Those forced continuations were
+discarded and never scored. Evaluation therefore uses batch 16 for all six models.
+The production launcher also enables expandable CUDA allocator segments.
+
 All runs see the same prompt order. GKD source choices use an independent seeded
 Bernoulli stream per microbatch. Effective batches are normalized by their actual
 supervised token count, including the final partial batch. Training trajectories

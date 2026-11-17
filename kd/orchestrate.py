@@ -77,14 +77,17 @@ def main():
                   lambda: job("pilot_E4", ["kd.train", "--experiment", "E4", "--pilot-steps", "4"], gpus[:2])])
     else:
         def first_pair():
-            parallel([lambda: train("E1", [gpus[0]]), lambda: evaluate("Teacher", gpus[1])])
-            parallel([lambda: evaluate("E0", gpus[0]), lambda: evaluate("E1", gpus[1])])
-            train("E2", gpus[:2])
-            evaluate("E2", gpus[0])
+            def first_student():
+                train("E1", [gpus[0]])
+                evaluate("E0", gpus[0])
+                evaluate("E1", gpus[0])
+            parallel([first_student, lambda: evaluate("Teacher", gpus[1])])
+            train("E3", gpus[:2])
+            evaluate("E3", gpus[0])
         def second_pair():
-            train("E3", gpus[2:])
             train("E4", gpus[2:])
-            parallel([lambda: evaluate("E3", gpus[2]), lambda: evaluate("E4", gpus[3])])
+            train("E2", gpus[2:])
+            parallel([lambda: evaluate("E4", gpus[2]), lambda: evaluate("E2", gpus[3])])
         parallel([first_pair, second_pair])
         job("audit", ["kd.audit"], [])
         job("report", ["kd.report"], [])
