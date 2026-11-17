@@ -1,0 +1,44 @@
+"""Exact full-vocabulary forward KL with checkpointed output projections."""
+import torch
+import torch.nn.functional as F
+from torch.utils.checkpoint import checkpoint
+
+
+def forward_kl(student_logits, teacher_logits, temperature=1.0):
+    s = F.log_softmax(student_logits.float() / temperature, dim=-1)
+    t = F.log_softmax(teacher_logits.float() / temperature, dim=-1)
+    return F.kl_div(s, t, reduction="sum", log_target=True) * temperature ** 2
+
+
+def response_loss(student, teacher, ids, attention, labels, chunk_size=32, temperature=1.0):
+    s_hidden = student.model(input_ids=ids, attention_mask=attention, use_cache=False).last_hidden_state
+    mask = labels[:, 1:] != -100
+    sh = s_hidden[:, :-1][mask]
+    targets = labels[:, 1:][mask]
+    if not targets.numel():
+        raise ValueError("A training batch contains no completion tokens")
+    th = None
+    if teacher is not None:
+        with torch.no_grad(), torch.autocast("cuda", dtype=torch.bfloat16):
+            teacher_hidden = teacher.model(input_ids=ids.to(teacher.device),
+                attention_mask=attention.to(teacher.device), use_cache=False).last_hidden_state
+            th = teacher_hidden[:, :-1][mask.to(teacher.device)]
+
+    def ce_chunk(h, y):
+        return F.cross_entropy(student.lm_head(h).float(), y, reduction="sum")
+
+    def kl_chunk(h, t):
+        sl = student.lm_head(h)
+        with torch.no_grad():
+            tl = teacher.lm_head(t).to(sl.device)
+        return forward_kl(sl, tl, temperature)
+
+    total = sh.new_zeros((), dtype=torch.float32)
+    for start in range(0, len(sh), chunk_size):
+        stop = start + chunk_size
+        if teacher is None:
+            part = checkpoint(ce_chunk, sh[start:stop], targets[start:stop], use_reentrant=False)
+        else:
+            part = checkpoint(kl_chunk, sh[start:stop], th[start:stop], use_reentrant=False)
+        total = total + part
+    return total, len(targets)

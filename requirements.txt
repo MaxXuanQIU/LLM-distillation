@@ -1,0 +1,10 @@
+torch==2.5.1
+transformers==4.57.1
+accelerate==1.10.1
+datasets==4.3.0
+trl==0.24.0
+lm_eval==0.4.9.2
+matplotlib==3.10.7
+pytest==8.4.2
+langdetect==1.0.9
+immutabledict==4.2.2
