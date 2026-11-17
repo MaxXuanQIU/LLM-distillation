@@ -1,11 +1,11 @@
 """Freeze dataset rows, non-thinking prompts, benchmark subset, and provenance."""
 import argparse
 import hashlib
+import json
 import random
 from pathlib import Path
 
 from datasets import load_dataset
-from huggingface_hub import HfApi
 
 from kd.common import config, digest_file, prompt_ids, tokenizer, write_json, write_jsonl
 
@@ -13,15 +13,16 @@ from kd.common import config, digest_file, prompt_ids, tokenizer, write_json, wr
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="config.json")
+    parser.add_argument("--revisions", default="dataset_revisions.json")
     args = parser.parse_args()
     cfg = config(args.config)
     tok = tokenizer(cfg["student"])
     teacher_tok = tokenizer(cfg["teacher"])
     assert tok.get_vocab() == teacher_tok.get_vocab(), "KD requires identical token IDs"
     assert prompt_ids(tok, "Test") == prompt_ids(teacher_tok, "Test")
-    api = HfApi()
     names = ["HuggingFaceH4/ultrachat_200k", "google/IFEval", "allenai/ai2_arc"]
-    revisions = {name: api.dataset_info(name).sha for name in names}
+    revisions = json.loads(Path(args.revisions).read_text())
+    assert set(names) <= revisions.keys(), "Missing pinned dataset revision"
     ds = load_dataset(names[0], split="train_sft", revision=revisions[names[0]])
     ifeval = load_dataset(names[1], split="train", revision=revisions[names[1]])
     arc = load_dataset(names[2], "ARC-Challenge", split="test", revision=revisions[names[2]])

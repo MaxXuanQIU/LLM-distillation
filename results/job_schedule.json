@@ -1,0 +1,120 @@
+{
+  "phase": "research",
+  "started": 1794915920.100021,
+  "gpus": [
+    "0",
+    "1",
+    "2",
+    "3"
+  ],
+  "jobs": {
+    "train_E4": {
+      "status": "complete",
+      "started": 1794915920.1022472,
+      "gpus": [
+        "2",
+        "3"
+      ],
+      "finished": 1794919660.0904765,
+      "returncode": 0
+    },
+    "train_E1": {
+      "status": "complete",
+      "started": 1794915920.1033509,
+      "gpus": [
+        "0"
+      ],
+      "finished": 1794916612.673698,
+      "returncode": 0
+    },
+    "eval_Teacher": {
+      "status": "complete",
+      "started": 1794915920.104761,
+      "gpus": [
+        "1"
+      ],
+      "finished": 1794919222.7731292,
+      "returncode": 0
+    },
+    "eval_E0": {
+      "status": "complete",
+      "started": 1794916612.674647,
+      "gpus": [
+        "0"
+      ],
+      "finished": 1794918387.8732557,
+      "returncode": 0
+    },
+    "eval_E1": {
+      "status": "complete",
+      "started": 1794918387.9398642,
+      "gpus": [
+        "0"
+      ],
+      "finished": 1794921163.9887614,
+      "returncode": 0
+    },
+    "train_E2": {
+      "status": "complete",
+      "started": 1794919660.09295,
+      "gpus": [
+        "2",
+        "3"
+      ],
+      "finished": 1794920864.5250602,
+      "returncode": 0
+    },
+    "eval_E2": {
+      "status": "complete",
+      "started": 1794920864.5526276,
+      "gpus": [
+        "3"
+      ],
+      "finished": 1794923672.2994134,
+      "returncode": 0
+    },
+    "eval_E4": {
+      "status": "complete",
+      "started": 1794920864.5545557,
+      "gpus": [
+        "2"
+      ],
+      "finished": 1794923689.986441,
+      "returncode": 0
+    },
+    "train_E3": {
+      "status": "complete",
+      "started": 1794921163.9958353,
+      "gpus": [
+        "0",
+        "1"
+      ],
+      "finished": 1794923676.9098706,
+      "returncode": 0
+    },
+    "eval_E3": {
+      "status": "complete",
+      "started": 1794923676.911176,
+      "gpus": [
+        "0"
+      ],
+      "finished": 1794926300.07364,
+      "returncode": 0
+    },
+    "audit": {
+      "status": "complete",
+      "started": 1794926300.0831249,
+      "gpus": [],
+      "finished": 1794926312.3540416,
+      "returncode": 0
+    },
+    "report": {
+      "status": "complete",
+      "started": 1794926312.3556879,
+      "gpus": [],
+      "finished": 1794926318.6637166,
+      "returncode": 0
+    }
+  },
+  "finished": 1794926318.6650863
+}

@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "checkpoint_sha256": {
+    "runs/E1/checkpoint/model.safetensors": "e8266d5543b6c729490b961e312c9bff2406dce849027b0833ae52b50f84fe23",
+    "runs/E2/checkpoint/model.safetensors": "d360f47247258507d9f129e316bccb2f6ccbbdba445817aee765f040da49404d",
+    "runs/E3/checkpoint/model.safetensors": "90f52220af16c6472704df61a131e9f81f7f6b000ffe72300b344f71037ddec9",
+    "runs/E4/checkpoint/model.safetensors": "254ee900851792e8315e2718de8cb47e2b87aa20c658cbf8bf96f732869db237"
+  },
+  "comparison": "SHA256 computed independently over local and remote model.safetensors files; all four match.",
+  "raw_artifact_sha256_files_verified": 26,
+  "final_audit_checkpoint_hashes_match": true
+}

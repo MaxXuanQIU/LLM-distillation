@@ -1,0 +1,30 @@
+{
+  "name": "Teacher",
+  "ifeval_prompts": 541,
+  "ifeval_instructions": 834,
+  "ifeval_strict_prompt_accuracy": 0.8096118299445472,
+  "ifeval_strict_instruction_accuracy": 0.8645083932853717,
+  "arc_accuracy": 0.8675,
+  "arc_examples": 400,
+  "ifeval_truncated": 14,
+  "evaluation_seconds_this_session": 3279.2523558409885,
+  "protocol": {
+    "thinking": false,
+    "ifeval_decoding": "greedy",
+    "ifeval_max_tokens": 2048,
+    "arc": "zero-shot chat; argmax next-token A-E logprob; fixed seeded test subset"
+  },
+  "git_commit": "7e336019fd0833b27fbba5176394884dfce53e12",
+  "versions": {
+    "torch": "2.5.1+cu124",
+    "transformers": "4.57.1",
+    "trl": "0.24.0",
+    "datasets": "4.3.0",
+    "lm_eval": "0.4.9.2",
+    "accelerate": "1.10.1"
+  },
+  "cuda_visible_devices": "1",
+  "gpus": [
+    "NVIDIA GeForce RTX 3090"
+  ]
+}

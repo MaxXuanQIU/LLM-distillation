@@ -80,6 +80,8 @@ def main():
             def first_student():
                 train("E1", [gpus[0]])
                 evaluate("E0", gpus[0])
+                if not Path("results/E0/validation.json").exists():
+                    job("validate_E0", ["kd.validate_baseline"], [gpus[0]])
                 evaluate("E1", gpus[0])
             parallel([first_student, lambda: evaluate("Teacher", gpus[1])])
             train("E3", gpus[:2])

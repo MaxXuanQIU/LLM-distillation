@@ -232,3 +232,5 @@ setup-ifeval.log
 *.bundle
 results/*/ifeval.jsonl
 results/*/arc.jsonl
+
+reproductions/

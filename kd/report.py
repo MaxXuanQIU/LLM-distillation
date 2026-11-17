@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from kd.common import config, digest_file, read_jsonl, write_json
+from kd.accounting import summarize
 
 
 def main():
@@ -17,10 +18,17 @@ def main():
     metrics = {n: json.loads(Path(f"results/{n}/metrics.json").read_text()) for n in names}
     train = {n: json.loads(Path(f"runs/{n}/summary.json").read_text()) for n in names[2:]}
     histories = {n: json.loads(Path(f"runs/{n}/history.json").read_text()) for n in names[2:]}
+    baseline_val = json.loads(Path("results/E0/validation.json").read_text())
+    generation = [json.loads(p.read_text()) for p in sorted(Path("data").glob("teacher_*_timing.json"))]
+    generation_gpu_hours = sum(r["seconds"] for r in generation)/3600
+    methods = {"Teacher": "Qwen3-4B", "E0": "Original Qwen3-0.6B", "E1": "Hard-label SFT",
+               "E2": "Off-policy KL (λ=0)", "E3": "Hybrid KL (λ=0.5)", "E4": "On-policy KL (λ=1)"}
     ifeval = {n: sorted(read_jsonl(f"results/{n}/ifeval.jsonl"), key=lambda r: r["id"]) for n in names}
     arc = {n: sorted(read_jsonl(f"results/{n}/arc.jsonl"), key=lambda r: r["id"]) for n in names}
     for source in [ifeval, arc]:
         assert all([r["id"] for r in source[n]] == [r["id"] for r in source["E0"]] for n in names)
+    timing, length_stats = summarize(metrics, train, histories, ifeval, baseline_val, generation)
+    diagnostics = json.loads(Path("results/training_diagnostics.json").read_text())
     counts = np.array([len(r["inst_level_strict_acc"]) for r in ifeval["E0"]])
     rng = np.random.default_rng(cfg["seed"])
     ix = rng.integers(0, len(counts), (10000, len(counts)))
@@ -43,10 +51,12 @@ def main():
                 "method": "paired bootstrap; resample prompts for IFEval, questions for ARC; unadjusted intervals",
                 "intervals": intervals, "comparisons": comparisons})
     with open("results/summary.csv", "w") as f:
-        writer = csv.DictWriter(f, fieldnames=["model", *keys, "completion_tokens", "allocated_gpu_hours", "validation_ce"])
+        writer = csv.DictWriter(f, fieldnames=["model", "method", *keys, "completion_tokens", "allocated_gpu_hours", "validation_ce"], lineterminator="\n")
         writer.writeheader()
         for n in names:
-            row = {"model": n, **{k: metrics[n][k] for k in keys}}
+            row = {"model": n, "method": methods[n], **{k: metrics[n][k] for k in keys}}
+            if n == "E0":
+                row["validation_ce"] = baseline_val["validation_cross_entropy"]
             if n in train:
                 row.update(completion_tokens=train[n]["completion_tokens"],
                            allocated_gpu_hours=train[n]["allocated_gpu_hours"],
@@ -76,13 +86,13 @@ def main():
     fig.savefig(figures/"on_policy_ratio.png", dpi=180)
     plt.close(fig)
     fig, axes = plt.subplots(1, 2, figsize=(11, 4), layout="constrained")
-    for n in names[2:]:
+    for n, color in zip(names[2:], colors[2:]):
         h = histories[n]
         ax = axes[0] if n == "E1" else axes[1]
         y = np.array([r["loss"] for r in h])
-        ax.plot([r["step"] for r in h], y, alpha=.2)
+        ax.plot([r["step"] for r in h], y, alpha=.2, color=color)
         window = min(15, len(y))
-        ax.plot([r["step"] for r in h][window-1:], np.convolve(y, np.ones(window)/window, mode="valid"), label=n)
+        ax.plot([r["step"] for r in h][window-1:], np.convolve(y, np.ones(window)/window, mode="valid"), label=n, color=color)
     for ax, title in zip(axes, ["E1: hard-label cross entropy", "E2–E4: forward KL on training contexts"]):
         ax.set(title=title, xlabel="Optimizer step", ylabel="Loss per response token (nats)")
         ax.legend()
@@ -98,12 +108,15 @@ def main():
 
     lines = ["# Off-policy, on-policy, and hybrid Qwen3 distillation", "", "## Completed experiment", "",
         "One full-parameter training run per condition, using Qwen3-4B as a frozen teacher and the same original Qwen3-0.6B initialization. "
-        "All models use non-thinking mode. These results describe this dataset, budget, and training seed; they do not establish a general ranking of distillation methods.", "",
-        "## Results", "", "| Model | IFEval strict prompt | IFEval strict instruction | ARC-Challenge |",
+        "All models use non-thinking mode. These results describe this dataset, budget, and training seed; they do not establish a general ranking of distillation methods.", ""]
+    conclusions = Path("docs/conclusions.md")
+    if conclusions.exists():
+        lines += [conclusions.read_text().strip(), ""]
+    lines += ["## Results", "", "| Model | IFEval strict prompt | IFEval strict instruction | ARC-Challenge |",
         "|---|---:|---:|---:|"]
     for n in names:
         values = [f"{metrics[n][k]*100:.2f}% [{intervals[n][k][0]*100:.2f}, {intervals[n][k][1]*100:.2f}]" for k in keys]
-        lines.append(f"| {n} | " + " | ".join(values) + " |")
+        lines.append(f"| {n}: {methods[n]} | " + " | ".join(values) + " |")
     lines += ["", "Brackets show 95% bootstrap intervals, resampling complete prompts for IFEval and questions for ARC. "
               "The instruction metric is micro-averaged. These intervals measure evaluation-set uncertainty, not training-seed variability.",
               "", "![Benchmark results](figures/benchmark_results.png)", "",
@@ -124,13 +137,38 @@ def main():
               "| Run | λ | Steps | Response tokens | Realized on-policy fraction | Allocated GPU hours | Validation CE |",
               "|---|---:|---:|---:|---:|---:|---:|"]
     for n, t in train.items():
-        lines.append(f"| {n} | {t['lambda']} | {t['optimizer_steps']} | {t['completion_tokens']:,} | "
+        lmbda = "—" if n == "E1" else t["lambda"]
+        lines.append(f"| {n} | {lmbda} | {t['optimizer_steps']} | {t['completion_tokens']:,} | "
                      f"{t['on_policy_examples']/t['examples']:.3f} | {t['allocated_gpu_hours']:.3f} | {t['validation_cross_entropy']:.4f} |")
+    if "main_phase_wall_hours" in timing:
+        lines += ["", f"The complete main phase took {timing['main_phase_wall_hours']:.3f} wall-clock hours and "
+                  f"{timing['main_phase_job_gpu_hours']:.3f} allocated job GPU hours, including loading, validation and export. "
+                  "It excludes preliminary pilots, shared teacher-data preparation, and the separately measured baseline validation. "
+                  f"The recorded job schedule peaks at {timing['peak_concurrent_assigned_gpus']} concurrent GPUs, all in physical IDs 0–3.", ""]
     lines += ["", "GPU hours are wall time × allocated devices, including student generation and idle teacher time; they are not integrated SM activity or energy. "
               "Teacher dataset generation and benchmark evaluation are separate costs. Validation CE uses the same held-out teacher sequences for every run.",
+              "", f"The original student's validation CE is {baseline_val['validation_cross_entropy']:.4f}. "
+              "Lower held-out teacher-response loss does not necessarily imply higher benchmark accuracy.",
+              "", f"Shared teacher-data generation loops used {generation_gpu_hours:.3f} GPU hours for "
+              f"{sum(r['new_tokens'] for r in generation):,} tokens across 5,200 responses. "
+              "This cost is excluded from the training bars. E4 does not use fixed training responses, so charging the entire shared preprocessing cost to each method would misrepresent standalone costs. "
+              "All runs use the held-out teacher responses for validation.",
+              "", f"The four training loops used {timing['training_loop_gpu_hours']:.3f} allocated GPU hours in total; "
+              f"the six evaluation loops used {timing['evaluation_loop_gpu_hours']:.3f}. "
+              "Training timers include periodic checkpoint writes but exclude initial loading, final validation, and final model export. "
+              "Generation and evaluation timers exclude initial model loading. Student-rollout generation is already included in training time.",
               "", "![On-policy ratio](figures/on_policy_ratio.png)",
               "", "![Training curves](figures/training_curves.png)", "", "![Training efficiency](figures/training_efficiency.png)",
               "", "KL losses across E2–E4 are measured on different generated contexts and cannot alone rank model quality. E1 cross entropy is a different objective.",
+              "", "Mean training loss over the first 20 versus last 20 optimizer steps: " + "; ".join(
+                  f"{n} {np.mean([r['loss'] for r in histories[n][:20]]):.4f} → "
+                  f"{np.mean([r['loss'] for r in histories[n][-20:]]):.4f}" for n in names[2:]) +
+              ". These averages describe within-run optimization; they do not demonstrate convergence to an optimum.",
+              "", f"Student rollout generation consumed {100*train['E3']['generation_seconds']/train['E3']['training_seconds']:.1f}% "
+              f"of hybrid training wall time and {100*train['E4']['generation_seconds']/train['E4']['training_seconds']:.1f}% "
+              "of on-policy training wall time. The completion cap was reached by "
+              f"{diagnostics['E3']['training_capped_responses']:,}/{train['E3']['examples']:,} hybrid sequences and "
+              f"{diagnostics['E4']['training_capped_responses']:,}/{train['E4']['examples']:,} on-policy sequences.",
               "", "## Protocol", "", "```json", json.dumps(cfg, indent=2), "```", "",
               "UltraChat train_sft rows were randomly permuted with the recorded seed. We selected unique first user prompts fitting the 512-token chat limit, "
               "excluding exact normalized benchmark-question matches, then split 5,000 training and 200 validation prompts. This length filter changes the source distribution; "
@@ -145,14 +183,19 @@ def main():
               "ARC: a seeded 400-question test subset, zero-shot chat with choices and an instruction to answer with a letter, "
               "then argmax over the single-token letter likelihoods. This custom protocol must not be compared directly with default harness ARC leaderboard results.", "",
               "## Truncation and limitations", ""]
+    lines += ["| Model | Mean response tokens | Median | 95th percentile | Capped IFEval responses |",
+              "|---|---:|---:|---:|---:|"]
     for n in names:
-        lines.append(f"- {n}: {metrics[n]['ifeval_truncated']}/{metrics[n]['ifeval_prompts']} IFEval generations reached the token limit without EOS.")
+        s = length_stats[n]
+        lines.append(f"| {n} | {s['mean_tokens']:.1f} | {s['median_tokens']:.0f} | {s['p95_tokens']:.0f} | {s['capped']}/541 |")
     fixed = read_jsonl("data/train.jsonl")
-    lines += ["", f"Teacher training responses reaching the completion cap: {sum(r['truncated'] for r in fixed)}/{len(fixed)}. "
+    lines += ["", f"Teacher training responses reaching the completion cap: {sum(r['truncated'] for r in fixed)}/{len(fixed)} "
+              f"({100*sum(r['truncated'] for r in fixed)/len(fixed):.2f}%). "
               "A truncated completion is supervised as observed, without inventing an EOS token. This can teach incomplete answers and is a material limitation of the proposed short-completion budget.", "",
               "The student already has instruction tuning. Only one training seed, one modest dataset, and two benchmarks were studied. "
               "The source mix changes context distributions, response lengths, and compute costs. Paired evaluation intervals do not remove these limitations.",
-              "", "## Selected generations", ""]
+              "", "## Selected generations", "",
+              "Improvement and regression refer to automatic strict instruction checks. Passing those checks does not establish factual accuracy, fluency, or usefulness; the E1 example at key 1082 passes its format checks despite substantial repetition.", ""]
     baseline = {r["id"]: r for r in ifeval["E0"]}
     for n in names[2:]:
         for category, predicate in [("improvement", lambda b, r: not b["prompt_level_strict_acc"] and r["prompt_level_strict_acc"]),
@@ -163,19 +206,26 @@ def main():
                 lines += [f"### {n}: {category}, IFEval key {r['id']}", "", "Prompt:", "", "```text", r["prompt"], "```", "",
                           "E0 response (excerpt):", "", "```text", baseline[r["id"]]["response"][:1800], "```", "",
                           f"{n} response (excerpt):", "", "```text", r["response"][:1800], "```", ""]
-    lines += ["Examples are selected deterministically by the first benchmark key meeting the stated change in strict prompt success. "
-              "Excerpts may be shortened for display; scoring used complete responses. Full records remain in the per-model JSONL files.", "",
+    lines += ["Examples are selected deterministically by the first lexicographically sorted benchmark key meeting the stated change in strict prompt success. "
+              "Excerpts may be shortened and trailing spaces omitted for display; scoring used unmodified complete responses. Full records remain in the per-model JSONL files.", "",
               "## Artifacts and reproducibility", "",
               "The server checkout is `/home/data2/xq/projects/LLM-distillation` on `10.123.4.22`. "
+              "A local copy of the fixed dataset, all four full checkpoints, and evaluation records is also retained in `/home/xq/projects/LLM-distillation`. "
               "`data/` contains fixed prompts, teacher token sequences, benchmark rows, and hashes; `runs/E*/checkpoint/` contains the four full student checkpoints; "
               "`runs/E*/history.json` contains training traces; `results/<model>/` contains per-example outputs and metrics. "
               "`results/summary.csv` and `results/comparisons.json` contain machine-readable summaries. The code and run provenance record Git revisions and package versions.", "",
+              f"All model runs used frozen revision `{metrics['E0']['git_commit']}`. Later changes add analysis, auditing, and reproduction helpers. "
+              "`dataset_revisions.json` pins the source data; `results/data_manifest.json` preserves the original preparation manifest. "
+              "An isolated preparation rerun reproduced all four prompt/benchmark file hashes exactly (`results/reproduction_check.json`). "
+              "The final artifact audit verifies source models, fixed teacher data, training coverage, benchmark identities, and metric aggregation.", "",
               "References: [On-policy distillation / GKD](https://arxiv.org/abs/2306.13649), "
               "[IFEval](https://arxiv.org/abs/2311.07911), [ARC](https://arxiv.org/abs/1803.05457), "
               "[Qwen3](https://huggingface.co/Qwen/Qwen3-0.6B), [TRL GKD](https://huggingface.co/docs/trl/gkd_trainer), "
               "[IFEval implementation](https://github.com/EleutherAI/lm-evaluation-harness/tree/v0.4.9.2/lm_eval/tasks/ifeval).", ""]
-    Path("results/report.md").write_text("\n".join(lines))
-    write_json("results/artifact_hashes.json", {str(p): digest_file(p) for p in sorted(Path("data").glob("*.jsonl"))})
+    Path("results/report.md").write_text("\n".join(line.rstrip() for line in "\n".join(lines).splitlines()) + "\n")
+    artifacts = [*Path("data").glob("*.jsonl"), *Path("results").glob("*/ifeval.jsonl"),
+                 *Path("results").glob("*/arc.jsonl"), *Path("runs").glob("E*/trajectories.jsonl")]
+    write_json("results/artifact_hashes.json", {str(p): digest_file(p) for p in sorted(artifacts)})
     print(Path("results/report.md").resolve())
 
 
