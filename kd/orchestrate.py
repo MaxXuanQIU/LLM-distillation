@@ -16,6 +16,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--phase", choices=["prepare", "generate", "pilot", "research"], required=True)
     parser.add_argument("--gpus", default="0,1,2,3")
+    parser.add_argument("--wait", action="store_true", help="Wait for another phase to release the four GPU locks")
     args = parser.parse_args()
     gpus = args.gpus.split(",")
     assert len(gpus) == 4 and len(set(gpus)) == 4
@@ -23,7 +24,7 @@ def main():
     locks = []
     for gpu in gpus:
         lock = open(f"/tmp/llm-distillation-{os.getuid()}-gpu{gpu}.lock", "w")
-        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        fcntl.flock(lock, fcntl.LOCK_EX | (0 if args.wait else fcntl.LOCK_NB))
         locks.append(lock)
     Path("logs").mkdir(exist_ok=True)
     state = {"phase": args.phase, "started": time.time(), "gpus": gpus, "jobs": {}}
@@ -71,6 +72,7 @@ def main():
         job("merge", ["kd.generate", "--merge"], [])
         job("audit_data", ["kd.audit", "--data-only"], [])
     elif args.phase == "pilot":
+        job("audit_data", ["kd.audit", "--data-only"], [])
         parallel([lambda: job("pilot_E1", ["kd.train", "--experiment", "E1", "--pilot-steps", "4"], [gpus[2]]),
                   lambda: job("pilot_E4", ["kd.train", "--experiment", "E4", "--pilot-steps", "4"], gpus[:2])])
     else:

@@ -64,6 +64,17 @@ def main():
         ax.tick_params(axis="x", rotation=35)
     fig.savefig(figures/"benchmark_results.png", dpi=180)
     plt.close(fig)
+    fig, axes = plt.subplots(1, 2, figsize=(9, 4), layout="constrained")
+    for ax, k, title in zip(axes, keys[1:], ["IFEval: strict instruction", "ARC-Challenge"]):
+        selected = ["E2", "E3", "E4"]
+        values = np.array([metrics[n][k]*100 for n in selected])
+        ci = np.array([intervals[n][k] for n in selected]).T*100
+        ax.errorbar([0, .5, 1], values, yerr=[values-ci[0], ci[1]-values], marker="o", capsize=4)
+        ax.axhline(metrics["E0"][k]*100, color="#777777", linestyle="--", label="Original student")
+        ax.set(title=title, xlabel="On-policy probability λ", ylabel="Accuracy (%)", xticks=[0, .5, 1])
+        ax.legend()
+    fig.savefig(figures/"on_policy_ratio.png", dpi=180)
+    plt.close(fig)
     fig, axes = plt.subplots(1, 2, figsize=(11, 4), layout="constrained")
     for n in names[2:]:
         h = histories[n]
@@ -95,7 +106,12 @@ def main():
         lines.append(f"| {n} | " + " | ".join(values) + " |")
     lines += ["", "Brackets show 95% bootstrap intervals, resampling complete prompts for IFEval and questions for ARC. "
               "The instruction metric is micro-averaged. These intervals measure evaluation-set uncertainty, not training-seed variability.",
-              "", "![Benchmark results](figures/benchmark_results.png)", "", "## Research questions", ""]
+              "", "![Benchmark results](figures/benchmark_results.png)", "",
+              "Changes relative to E0, in percentage points:", "",
+              "| Model | Δ strict prompt | Δ strict instruction | Δ ARC |", "|---|---:|---:|---:|"]
+    for n in names[2:]:
+        lines.append(f"| {n} | " + " | ".join(f"{(metrics[n][k]-metrics['E0'][k])*100:+.2f}" for k in keys) + " |")
+    lines += ["", "## Research questions", ""]
     for label, pair in [("RQ1: soft vs hard labels", "E2-E1"), ("RQ2: on-policy vs off-policy", "E4-E2"),
                         ("RQ3: hybrid vs off-policy", "E3-E2"), ("RQ3: hybrid vs on-policy", "E3-E4")]:
         c = comparisons[pair]
@@ -112,6 +128,7 @@ def main():
                      f"{t['on_policy_examples']/t['examples']:.3f} | {t['allocated_gpu_hours']:.3f} | {t['validation_cross_entropy']:.4f} |")
     lines += ["", "GPU hours are wall time × allocated devices, including student generation and idle teacher time; they are not integrated SM activity or energy. "
               "Teacher dataset generation and benchmark evaluation are separate costs. Validation CE uses the same held-out teacher sequences for every run.",
+              "", "![On-policy ratio](figures/on_policy_ratio.png)",
               "", "![Training curves](figures/training_curves.png)", "", "![Training efficiency](figures/training_efficiency.png)",
               "", "KL losses across E2–E4 are measured on different generated contexts and cannot alone rank model quality. E1 cross entropy is a different objective.",
               "", "## Protocol", "", "```json", json.dumps(cfg, indent=2), "```", "",
@@ -153,7 +170,9 @@ def main():
               "`data/` contains fixed prompts, teacher token sequences, benchmark rows, and hashes; `runs/E*/checkpoint/` contains the four full student checkpoints; "
               "`runs/E*/history.json` contains training traces; `results/<model>/` contains per-example outputs and metrics. "
               "`results/summary.csv` and `results/comparisons.json` contain machine-readable summaries. The code and run provenance record Git revisions and package versions.", "",
-              "References: [Qwen3](https://huggingface.co/Qwen/Qwen3-0.6B), [TRL GKD](https://huggingface.co/docs/trl/gkd_trainer), "
+              "References: [On-policy distillation / GKD](https://arxiv.org/abs/2306.13649), "
+              "[IFEval](https://arxiv.org/abs/2311.07911), [ARC](https://arxiv.org/abs/1803.05457), "
+              "[Qwen3](https://huggingface.co/Qwen/Qwen3-0.6B), [TRL GKD](https://huggingface.co/docs/trl/gkd_trainer), "
               "[IFEval implementation](https://github.com/EleutherAI/lm-evaluation-harness/tree/v0.4.9.2/lm_eval/tasks/ifeval).", ""]
     Path("results/report.md").write_text("\n".join(lines))
     write_json("results/artifact_hashes.json", {str(p): digest_file(p) for p in sorted(Path("data").glob("*.jsonl"))})
