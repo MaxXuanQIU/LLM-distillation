@@ -228,5 +228,7 @@ runs/
 logs/
 .cache/
 setup.log
+setup-ifeval.log
+*.bundle
 results/*/ifeval.jsonl
 results/*/arc.jsonl

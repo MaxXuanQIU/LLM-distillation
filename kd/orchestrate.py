@@ -36,7 +36,7 @@ def main():
                    OMP_NUM_THREADS="4", MKL_NUM_THREADS="4", PYTHONUNBUFFERED="1",
                    HF_ENDPOINT="https://hf-mirror.com", HF_HUB_DISABLE_XET="1",
                    HF_HOME=str(Path(".cache/huggingface").resolve()),
-                   NLTK_DATA=str(Path(".cache/nltk_data").resolve()),
+                   NLTK_DATA=str(Path.home()/"nltk_data"),
                    PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True")
         with state_lock:
             state["jobs"][name] = {"status": "running", "started": time.time(), "gpus": devices}
@@ -69,6 +69,7 @@ def main():
     elif args.phase == "generate":
         parallel([lambda i=i: job(f"generate_{i}", ["kd.generate", "--shard", str(i)], [gpus[i]]) for i in range(4)])
         job("merge", ["kd.generate", "--merge"], [])
+        job("audit_data", ["kd.audit", "--data-only"], [])
     elif args.phase == "pilot":
         parallel([lambda: job("pilot_E1", ["kd.train", "--experiment", "E1", "--pilot-steps", "4"], [gpus[2]]),
                   lambda: job("pilot_E4", ["kd.train", "--experiment", "E4", "--pilot-steps", "4"], gpus[:2])])
@@ -83,6 +84,7 @@ def main():
             train("E4", gpus[2:])
             parallel([lambda: evaluate("E3", gpus[2]), lambda: evaluate("E4", gpus[3])])
         parallel([first_pair, second_pair])
+        job("audit", ["kd.audit"], [])
         job("report", ["kd.report"], [])
     state["finished"] = time.time()
     write_json("logs/status.json", state)

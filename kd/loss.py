@@ -19,7 +19,8 @@ def response_loss(student, teacher, ids, attention, labels, chunk_size=32, tempe
         raise ValueError("A training batch contains no completion tokens")
     th = None
     if teacher is not None:
-        with torch.no_grad(), torch.autocast("cuda", dtype=torch.bfloat16):
+        with torch.no_grad(), torch.autocast(teacher.device.type, dtype=torch.bfloat16,
+                                            enabled=teacher.device.type == "cuda"):
             teacher_hidden = teacher.model(input_ids=ids.to(teacher.device),
                 attention_mask=attention.to(teacher.device), use_cache=False).last_hidden_state
             th = teacher_hidden[:, :-1][mask.to(teacher.device)]

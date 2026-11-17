@@ -10,7 +10,7 @@ import torch
 from transformers import get_cosine_schedule_with_warmup
 
 from kd.common import (collate, config, generate, load_model, provenance, read_jsonl,
-                       seed_all, tokenizer, write_json)
+                       seed_all, tokenizer, write_json, write_jsonl)
 from kd.loss import response_loss
 
 
@@ -84,11 +84,15 @@ def main():
                    "lambda": lmbda, "beta": 0, "trainable_parameters": sum(p.numel() for p in student.parameters()),
                    "precision": "FP32 master parameters and AdamW states; BF16 autocast activations", **provenance()})
     start = time.monotonic()
+    trajectory_path = out / "trajectories.jsonl"
+    prior = read_jsonl(trajectory_path) if first_step and trajectory_path.exists() else []
+    write_jsonl(trajectory_path, [r for r in prior if r["step"] <= first_step])
     student.train()
     optimizer.zero_grad(set_to_none=True)
     for step in range(first_step, steps):
         batch = train[step*effective:(step+1)*effective]
         step_loss, step_tokens, step_on, step_generation = 0., 0, 0, 0.
+        trajectories = []
         for offset in range(0, len(batch), micro):
             part = batch[offset:offset+micro]
             on_policy = mix_rng.random() < lmbda
@@ -99,6 +103,9 @@ def main():
                 step_on += len(part)
             else:
                 comp = [r["completion_ids"] for r in part]
+            for row, completion in zip(part, comp):
+                trajectories.append({"step": step+1, "id": row["id"], "on_policy": on_policy,
+                    "completion_ids": completion, "truncated": completion[-1] != tok.eos_token_id})
             ids, mask, labels = collate(part, comp, tok.pad_token_id, student.device)
             with torch.autocast("cuda", dtype=torch.bfloat16):
                 loss, n = response_loss(student, teacher, ids, mask, labels,
@@ -129,6 +136,9 @@ def main():
                   "seconds": elapsed, "peak_memory_gb": [torch.cuda.max_memory_allocated(i)/1e9
                                                           for i in range(torch.cuda.device_count())]}
         history.append(record)
+        with trajectory_path.open("a") as f:
+            for trajectory in trajectories:
+                f.write(json.dumps(trajectory) + "\n")
         write_json(out/"history.json", history)
         print(json.dumps(record), flush=True)
         if not args.pilot_steps and ((step+1) % 50 == 0 or step+1 == steps):

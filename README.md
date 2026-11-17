@@ -30,7 +30,7 @@ nohup .venv/bin/python -m kd.orchestrate --phase research > logs/research.log 2>
 ```
 
 Download NLTK `punkt`, `punkt_tab`, and `averaged_perceptron_tagger_eng` to
-`.cache/nltk_data` before evaluation. The server environment reuses the existing
+`~/nltk_data` before evaluation (NLTK requires a private download directory). The server environment reuses the existing
 PyTorch installation through a `.pth` entry while installing additional packages
 in this project's own virtual environment. `environment.freeze.txt` records the
 resolved versions. No packages are installed into another project's environment.
