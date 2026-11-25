@@ -1,0 +1,7 @@
+# Training with a 1,024-token completion budget
+
+The training configuration differs from the 256-token experiment in one setting. The teacher and student can generate up to 1,024 response tokens, giving a maximum training sequence of 1,536 tokens with the existing 512-token prompt limit. Both studies use the same 5,000 training and 200 validation prompts, initial models, sampling parameters, effective batch of 32 and 157 optimizer steps.
+
+From the repository root on the GPU server, run `bash studies/completion-1024/run.sh`. The launcher copies the archived prompt files and preparation manifest into `reproductions/completion-1024/`, checks existing inputs on restart, and generates fresh teacher responses. The four training conditions and six benchmark evaluations write to that directory. IFEval uses the same greedy 2,048-token evaluation limit, and ARC uses the same 400 questions. Physical GPUs 0–3 are the maximum allocation.
+
+The comparison script pairs results by item ID across budgets and reports percentage-point differences. Its 10,000 bootstrap resamples use complete IFEval prompts and ARC questions. The instruction score uses the number of individual instructions as its denominator. Intervals quantify evaluation-set sampling variability for this single training seed. Both runs spend one epoch on the same prompts. The longer budget can change the number of supervised tokens and the amount of compute.

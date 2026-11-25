@@ -143,7 +143,7 @@ def main():
     if "main_phase_wall_hours" in timing:
         lines += ["", f"The complete main phase took {timing['main_phase_wall_hours']:.3f} wall-clock hours and "
                   f"{timing['main_phase_job_gpu_hours']:.3f} allocated job GPU hours, including loading, validation and export. "
-                  "It excludes preliminary pilots, shared teacher-data preparation, and the separately measured baseline validation. "
+                  "The main phase excludes preliminary pilots and shared teacher-data preparation. "
                   f"The recorded job schedule peaks at {timing['peak_concurrent_assigned_gpus']} concurrent GPUs, all in physical IDs 0–3.", ""]
     lines += ["", "GPU hours are wall time × allocated devices, including student generation and idle teacher time; they are not integrated SM activity or energy. "
               "Teacher dataset generation and benchmark evaluation are separate costs. Validation CE uses the same held-out teacher sequences for every run.",
@@ -191,11 +191,11 @@ def main():
     fixed = read_jsonl("data/train.jsonl")
     lines += ["", f"Teacher training responses reaching the completion cap: {sum(r['truncated'] for r in fixed)}/{len(fixed)} "
               f"({100*sum(r['truncated'] for r in fixed)/len(fixed):.2f}%). "
-              "A truncated completion is supervised as observed, without inventing an EOS token. This can teach incomplete answers and is a material limitation of the proposed short-completion budget.", "",
+              "A truncated completion is supervised as observed, without inventing an EOS token. The truncation rate measures how often the student saw an unfinished fixed response.", "",
               "The student already has instruction tuning. Only one training seed, one modest dataset, and two benchmarks were studied. "
               "The source mix changes context distributions, response lengths, and compute costs. Paired evaluation intervals do not remove these limitations.",
               "", "## Selected generations", "",
-              "Improvement and regression refer to automatic strict instruction checks. Passing those checks does not establish factual accuracy, fluency, or usefulness; the E1 example at key 1082 passes its format checks despite substantial repetition.", ""]
+              "Improvement and regression refer to automatic strict instruction checks. The examples illustrate the scored constraints. Broader aspects of response quality require separate assessment.", ""]
     baseline = {r["id"]: r for r in ifeval["E0"]}
     for n in names[2:]:
         for category, predicate in [("improvement", lambda b, r: not b["prompt_level_strict_acc"] and r["prompt_level_strict_acc"]),
@@ -209,14 +209,12 @@ def main():
     lines += ["Examples are selected deterministically by the first lexicographically sorted benchmark key meeting the stated change in strict prompt success. "
               "Excerpts may be shortened and trailing spaces omitted for display; scoring used unmodified complete responses. Full records remain in the per-model JSONL files.", "",
               "## Artifacts and reproducibility", "",
-              "The server checkout is `/home/data2/xq/projects/LLM-distillation` on `10.123.4.22`. "
-              "A local copy of the fixed dataset, all four full checkpoints, and evaluation records is also retained in `/home/xq/projects/LLM-distillation`. "
+              f"The artifact root on the machine that ran the report is `{Path.cwd()}`. "
               "`data/` contains fixed prompts, teacher token sequences, benchmark rows, and hashes; `runs/E*/checkpoint/` contains the four full student checkpoints; "
               "`runs/E*/history.json` contains training traces; `results/<model>/` contains per-example outputs and metrics. "
               "`results/summary.csv` and `results/comparisons.json` contain machine-readable summaries. The code and run provenance record Git revisions and package versions.", "",
-              f"All model runs used frozen revision `{metrics['E0']['git_commit']}`. Later changes add analysis, auditing, and reproduction helpers. "
-              "`dataset_revisions.json` pins the source data; `results/data_manifest.json` preserves the original preparation manifest. "
-              "An isolated preparation rerun reproduced all four prompt/benchmark file hashes exactly (`results/reproduction_check.json`). "
+              f"All model runs used frozen revision `{metrics['E0']['git_commit']}`. "
+              "The original preparation manifest in `data/manifest.json` identifies the source revisions and prompt file hashes. "
               "The final artifact audit verifies source models, fixed teacher data, training coverage, benchmark identities, and metric aggregation.", "",
               "References: [On-policy distillation / GKD](https://arxiv.org/abs/2306.13649), "
               "[IFEval](https://arxiv.org/abs/2311.07911), [ARC](https://arxiv.org/abs/1803.05457), "
