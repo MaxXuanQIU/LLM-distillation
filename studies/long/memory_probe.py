@@ -6,6 +6,7 @@ from kd.loss import response_loss
 cfg = config()
 seed_all(cfg["seed"])
 student = load_model(cfg["student"], "cuda:0", train=True)
+student.train()
 teacher = load_model(cfg["teacher"], "cuda:1")
 tok = tokenizer(cfg["student"])
 row = max(read_jsonl("data/validation_prompts.jsonl"), key=lambda r: len(r["prompt_ids"]))
