@@ -14,4 +14,5 @@ if [[ ! -f logs/research_schedule.json ]]; then
     "$python" -m kd.orchestrate --phase research --wait
     cp logs/status.json logs/research_schedule.json
 fi
+CUDA_VISIBLE_DEVICES= "$python" studies/long/conclude.py
 CUDA_VISIBLE_DEVICES= "$python" -m kd.report
