@@ -5,11 +5,11 @@
   "train_size": 5000,
   "validation_size": 200,
   "max_prompt_tokens": 512,
-  "max_completion_tokens": 256,
-  "eval_max_new_tokens": 2048,
+  "max_completion_tokens": 16384,
+  "eval_max_new_tokens": 16384,
   "micro_batch_size": 32,
   "effective_batch_size": 32,
-  "learning_rate": 0.00001,
+  "learning_rate": 1e-05,
   "weight_decay": 0.01,
   "warmup_ratio": 0.05,
   "max_grad_norm": 1.0,
@@ -20,5 +20,7 @@
   "loss_chunk_size": 128,
   "eval_batch_size": 16,
   "generation_batch_size": 16,
-  "arc_size": 400
+  "arc_size": 400,
+  "max_training_batch_tokens": 8192,
+  "max_generation_batch_tokens": 20000
 }

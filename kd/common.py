@@ -92,7 +92,7 @@ def trim_completion(ids, eos):
 
 
 @torch.no_grad()
-def generate(model, tok, rows, max_new_tokens, cfg, sample=True):
+def _generate_batch(model, tok, rows, max_new_tokens, cfg, sample=True):
     training = model.training
     model.eval()
     batch = pad_prompts(rows, tok, model.device)
@@ -107,6 +107,47 @@ def generate(model, tok, rows, max_new_tokens, cfg, sample=True):
                    output[:, batch.input_ids.shape[1]:].tolist()]
     model.train(training)
     return completions
+
+
+def generate(model, tok, rows, max_new_tokens, cfg, sample=True):
+    """Continue unfinished sequences in smaller batches as their context grows."""
+    limit = cfg.get("max_generation_batch_tokens")
+    if limit is None:
+        return _generate_batch(model, tok, rows, max_new_tokens, cfg, sample)
+    completions = [[] for _ in rows]
+    active = list(range(len(rows)))
+    generated = 0
+    while active and generated < max_new_tokens:
+        stop = min(max_new_tokens, max(512, generated * 2))
+        longest = max(len(rows[i]["prompt_ids"]) for i in active)
+        capacity = max(1, limit // (longest + stop))
+        remaining = []
+        for offset in range(0, len(active), capacity):
+            indices = active[offset:offset + capacity]
+            inputs = [{"prompt_ids": rows[i]["prompt_ids"] + completions[i]} for i in indices]
+            tails = _generate_batch(model, tok, inputs, stop - generated, cfg, sample)
+            for i, tail in zip(indices, tails):
+                completions[i].extend(tail)
+                if tail[-1] != tok.eos_token_id:
+                    assert len(completions[i]) == stop
+                    remaining.append(i)
+        generated = stop
+        active = remaining
+    return completions
+
+
+def training_parts(rows, completions, token_budget):
+    """Pack nearby lengths within an update. A long single sequence stays intact."""
+    order = sorted(range(len(rows)), key=lambda i: len(rows[i]["prompt_ids"]) + len(completions[i]))
+    batch = []
+    for i in order:
+        length = len(rows[i]["prompt_ids"]) + len(completions[i])
+        if batch and length * (len(batch) + 1) > token_budget:
+            yield [rows[j] for j in batch], [completions[j] for j in batch]
+            batch = []
+        batch.append(i)
+    if batch:
+        yield [rows[j] for j in batch], [completions[j] for j in batch]
 
 
 def collate(rows, completions, pad_id, device):

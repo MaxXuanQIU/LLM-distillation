@@ -179,7 +179,7 @@ def main():
               "Training uses FP32 master parameters and AdamW states with BF16 autocast, gradient checkpointing, response-only masking, "
               "token-weighted effective batches, gradient clipping, and a cosine learning-rate schedule. Every condition sees one epoch and the same optimizer-step budget. "
               "Actual token budgets differ because completions can terminate early. No benchmark scores were used to select hyperparameters.", "",
-              "IFEval: all 541 prompts, greedy decoding, a 2,048-token completion limit, and lm-evaluation-harness 0.4.9.2 strict scoring. "
+              f"IFEval uses all 541 prompts, greedy decoding, a {cfg['eval_max_new_tokens']:,}-token completion limit, and lm-evaluation-harness 0.4.9.2 strict scoring. "
               "ARC: a seeded 400-question test subset, zero-shot chat with choices and an instruction to answer with a letter, "
               "then argmax over the single-token letter likelihoods. This custom protocol must not be compared directly with default harness ARC leaderboard results.", "",
               "## Truncation and limitations", ""]

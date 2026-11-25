@@ -1,9 +1,0 @@
-{
-  "train_prompts": 5000,
-  "teacher_response_tokens": 1187750,
-  "teacher_truncated_responses": 4208,
-  "teacher_truncation_rate": 0.8416,
-  "prompt_tokens_median": 92.0,
-  "teacher_generation_gpu_hours": 1.2201076819207002,
-  "teacher_generation_tokens": 1234355
-}

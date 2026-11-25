@@ -10,7 +10,7 @@ import torch
 from transformers import get_cosine_schedule_with_warmup
 
 from kd.common import (collate, config, generate, load_model, provenance, read_jsonl,
-                       seed_all, tokenizer, write_json, write_jsonl)
+                       seed_all, tokenizer, training_parts, write_json, write_jsonl)
 from kd.loss import response_loss
 
 
@@ -20,11 +20,13 @@ def validation(model, tok, rows, cfg):
     total, tokens = 0., 0
     for start in range(0, len(rows), cfg["micro_batch_size"]):
         batch = rows[start:start+cfg["micro_batch_size"]]
-        ids, mask, labels = collate(batch, [r["completion_ids"] for r in batch], tok.pad_token_id, model.device)
-        with torch.autocast("cuda", dtype=torch.bfloat16):
-            loss, n = response_loss(model, None, ids, mask, labels, cfg["loss_chunk_size"])
-        total += loss.item()
-        tokens += n
+        completions = [r["completion_ids"] for r in batch]
+        for part, comp in training_parts(batch, completions, cfg.get("max_training_batch_tokens", float("inf"))):
+            ids, mask, labels = collate(part, comp, tok.pad_token_id, model.device)
+            with torch.autocast("cuda", dtype=torch.bfloat16):
+                loss, n = response_loss(model, None, ids, mask, labels, cfg["loss_chunk_size"])
+            total += loss.item()
+            tokens += n
     model.train()
     return total / tokens
 
@@ -106,16 +108,17 @@ def main():
             for row, completion in zip(part, comp):
                 trajectories.append({"step": step+1, "id": row["id"], "on_policy": on_policy,
                     "completion_ids": completion, "truncated": completion[-1] != tok.eos_token_id})
-            ids, mask, labels = collate(part, comp, tok.pad_token_id, student.device)
-            with torch.autocast("cuda", dtype=torch.bfloat16):
-                loss, n = response_loss(student, teacher, ids, mask, labels,
-                                        cfg["loss_chunk_size"], cfg["kd_temperature"])
-            if not torch.isfinite(loss):
-                raise FloatingPointError(f"Non-finite loss at step {step}")
-            loss.backward()
-            step_loss += loss.item()
-            step_tokens += n
-            del loss, ids, mask, labels
+            for piece, targets in training_parts(part, comp, cfg.get("max_training_batch_tokens", float("inf"))):
+                ids, mask, labels = collate(piece, targets, tok.pad_token_id, student.device)
+                with torch.autocast("cuda", dtype=torch.bfloat16):
+                    loss, n = response_loss(student, teacher, ids, mask, labels,
+                                            cfg["loss_chunk_size"], cfg["kd_temperature"])
+                if not torch.isfinite(loss):
+                    raise FloatingPointError(f"Non-finite loss at step {step}")
+                loss.backward()
+                step_loss += loss.item()
+                step_tokens += n
+                del loss, ids, mask, labels
         for param in student.parameters():
             if param.grad is not None:
                 param.grad.div_(step_tokens)

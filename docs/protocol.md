@@ -1,92 +1,11 @@
-# Protocol decisions
+# Experimental protocol
 
-The attached proposal is preserved in `research_proposal.md`. The experiment uses
-its five student conditions and evaluates the teacher as a sixth model.
+Qwen3-4B provides the fixed teacher responses and soft labels. Every trained condition starts from the same original Qwen3-0.6B checkpoint. Both models use the non-thinking chat template. The 5,000 training prompts and 200 validation prompts are fixed, disjoint first user turns from UltraChat. Prompt filtering limits templated input to 512 tokens. The preparation manifest records source model hashes, dataset revisions and all benchmark input hashes.
 
-## Controls
+The configured response ceiling is 16,384 new tokens. Sampling uses temperature 0.7, top-p 0.8, and top-k 20. A natural EOS ends a sequence and counts as a supervised token. Responses that reach the limit are retained and flagged. Before full training, the teacher and original student generate answers to the same 64 seeded validation prompts to measure termination behavior. The full study reports censoring in each training condition.
 
-All conditions start from the same original instruction-tuned Qwen3-0.6B weights,
-use one fixed 5,000-prompt training set, one epoch, and the same AdamW settings.
-E1 and E2 use exactly the same stored teacher response token IDs. E2–E4 use full
-vocabulary forward KL, with no top-k approximation or sampled soft targets.
-Teacher and student tokenizers are checked for identical vocabularies and chat
-prefixes. The teacher remains frozen. Every student parameter is trainable.
+E1 uses hard-label cross entropy on stored teacher responses. E2 uses exact forward KL on the same fixed contexts. E3 chooses teacher or fresh student contexts with probability 0.5 per batch, and E4 always generates from the current student. All conditions use one epoch, effective batch size 32, the same prompt order and 157 optimizer updates. The KL temperature is 1. The teacher remains frozen. The student uses FP32 master weights and AdamW states with BF16 autocast. Prompt targets and padding have zero loss weight. All response tokens in the full update contribute equally.
 
-The custom PyTorch training loop implements TRL's beta=0 GKD objective. A numerical
-test checks equality with TRL 0.24.0, and separate tests compare the chunked loss
-and every parameter gradient with a dense reference model. Chunking changes peak
-memory, not the loss definition. Prompt and padding targets are masked; a real
-EOS is included. A length-capped response is not given an artificial EOS.
+Generation proceeds in stages. Unfinished rows resume from their exact token prefix, and finished rows leave the batch. Training groups examples by length within each update to bound padded activations. Individual long examples retain their entire response and contribute to the same token-normalized optimizer update. Longer outputs can increase the total training tokens and allocated GPU hours.
 
-BF16 autocast is used with FP32 master parameters and optimizer states. This
-avoids losing small AdamW updates in BF16 parameter rounding. The teacher resides
-on a second GPU for each soft-label run. The maximum global allocation is physical
-GPUs 0–3; GPUs 4–7 are not selected by any job.
-
-## Sampling and budgets
-
-The seed is 20261117. UltraChat train_sft rows are randomly permuted before selecting
-unique first user turns that fit the 512-token prompt budget. Exact normalized
-matches to IFEval prompts and ARC questions are excluded. The first 5,000 selected
-rows are training; the next 200 are validation. This is a length-filtered sample,
-not an unqualified random sample of all conversations.
-
-Teacher and student rollouts sample at temperature 0.7, top-p 0.8, top-k 20 in
-non-thinking mode. The training completion cap is the proposal's upper bound,
-256 tokens. Initial teacher samples show that many responses reach this cap;
-the final report must quantify this limitation instead of treating all examples
-as complete answers. The same generation cap applies to every training condition.
-
-The pilot tests memory and numerical stability. Batch size can be finalized from
-the pilot; evaluation benchmarks are not used for tuning. The final configuration
-is stored both at the repository root and in each run's metadata.
-
-The completed pilots used 4 optimizer steps each. Batch 16 used 10.80 GB for SFT
-and 11.47 GB on the on-policy student GPU. Batch 32 with 128-token loss chunks
-used 13.10 GB for SFT and 14.62 GB on the on-policy student GPU (10.01 GB for its
-teacher). Batch 32 improved examples per second, so the final training microbatch
-and effective batch are both 32, giving 157 steps for 5,000 examples. The learning
-rate remains 1e-5; no benchmark scores were consulted.
-
-A separate memory-only probe forced the teacher to generate the full 2,048 tokens
-on a batch of the 32 longest IFEval prompts. It ran out of memory near the length
-limit, with allocator fragmentation contributing. Those forced continuations were
-discarded and never scored. Evaluation therefore uses batch 16 for all six models.
-The production launcher also enables expandable CUDA allocator segments.
-
-All runs see the same prompt order. GKD source choices use an independent seeded
-Bernoulli stream per microbatch. Effective batches are normalized by their actual
-supervised token count, including the final partial batch. Training trajectories
-record prompt IDs, source choices, and exact completion token IDs. Equal prompt
-and step budgets do not imply equal response-token counts; both are reported.
-
-## Evaluation and inference
-
-IFEval uses all 541 prompts, the non-thinking chat template, greedy decoding, and
-a 2,048-token generation cap. The pinned lm-evaluation-harness scorer supplies
-strict prompt and instruction metrics. Instruction accuracy is micro-averaged,
-not an average of prompt-level instruction fractions. Language detection is seeded.
-
-ARC uses a fixed seeded 400-example subset of the test split. A zero-shot user
-message gives the question and choices and requests only the answer letter. The
-predicted answer maximizes the next-token likelihood among candidate letters.
-The same protocol is used for all six models. It is not the default harness ARC
-continuation-scoring protocol, so external leaderboard comparisons are inappropriate.
-
-Ten thousand paired bootstrap replicates resample whole IFEval prompts or ARC
-questions. Instruction intervals preserve clustering within prompts. Pairwise
-intervals are exploratory and not corrected for multiple comparisons. They do
-not capture variation across training seeds. No hypothesis is assumed true.
-
-## Artifacts and timing
-
-The server stores the dataset and four full student checkpoints. Git records code
-on `main`. Dataset revisions, model file hashes, package versions, exact prompts,
-training trajectories, and per-example evaluation outputs make the run auditable.
-The final artifact audit checks all 5,000 unique training IDs, token counts,
-off-policy sequence equality, optimizer steps, benchmark sizes, and checkpoint hashes.
-
-Allocated GPU hours are training wall time multiplied by the number of GPUs assigned
-to that run. They include generation and idle time; they are not energy or integrated
-GPU utilization. Generation and evaluation timings are recorded separately. Large
-artifacts stay outside Git; compact metrics, charts, and the report are retained.
+Each of the six models is evaluated on all 541 IFEval prompts with greedy decoding and a 16,384-token response ceiling. The pinned harness scorer measures strict prompt accuracy and strict instruction accuracy (micro-averaged over instructions). ARC uses the same fixed 400 test questions with zero-shot chat and the highest-likelihood answer letter. Uncertainty intervals resample whole prompts or questions with 10,000 paired bootstrap replicates. Training-seed variability requires additional runs.
