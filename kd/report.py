@@ -188,10 +188,25 @@ def main():
     for n in names:
         s = length_stats[n]
         lines.append(f"| {n} | {s['mean_tokens']:.1f} | {s['median_tokens']:.0f} | {s['p95_tokens']:.0f} | {s['capped']}/541 |")
-    fixed = read_jsonl("data/train.jsonl")
-    lines += ["", f"Teacher training responses reaching the completion cap: {sum(r['truncated'] for r in fixed)}/{len(fixed)} "
-              f"({100*sum(r['truncated'] for r in fixed)/len(fixed):.2f}%). "
-              "A truncated completion is supervised as observed, without inventing an EOS token. The truncation rate measures how often the student saw an unfinished fixed response.", "",
+    fixed = diagnostics["E1"]["lengths_by_source"]["teacher"]
+    lines += ["", f"Of {fixed['answers']:,} fixed teacher answers, {fixed['answers_longer_than_1024']:,} "
+              f"continued beyond token 1,024. These continuations contributed {fixed['tokens_after_1024']:,} tokens "
+              f"({100*fixed['tokens_after_1024']/fixed['tokens']:.1f}% of supervised tokens).", "",
+              "| Training context | Answers | Capped answers | Tokens from capped answers | Capped answers with periodic endings |",
+              "|---|---:|---:|---:|---:|"]
+    for name, source, label in [("E1", "teacher", "E1 and E2 fixed teacher"),
+                                ("E3", "teacher", "E3 fixed teacher"),
+                                ("E3", "student", "E3 current student"),
+                                ("E4", "student", "E4 current student")]:
+        stats = diagnostics[name]["lengths_by_source"].get(source)
+        if stats:
+            token_share = 100 * stats["tokens_in_capped_answers"] / stats["tokens"]
+            lines.append(f"| {label} | {stats['answers']:,} | {stats['capped_answers']:,} | "
+                         f"{stats['tokens_in_capped_answers']:,} ({token_share:.1f}%) | {stats['capped_with_periodic_tail']:,} |")
+    lines += ["", "Token shares use all response tokens in the indicated context group as the denominator. "
+              "A periodic ending means the final 512 tokens repeat exactly with a period of 1–128 tokens. "
+              "A capped sequence contributes its observed tokens to training without an added EOS. "
+              "Gradients are normalized by the number of supervised tokens within each optimizer update.", "",
               "The student already has instruction tuning. Only one training seed, one modest dataset, and two benchmarks were studied. "
               "The source mix changes context distributions, response lengths, and compute costs. Paired evaluation intervals do not remove these limitations.",
               "", "## Selected generations", "",
