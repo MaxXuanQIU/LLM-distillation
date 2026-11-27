@@ -1,0 +1,20 @@
+{
+  "name": "E0",
+  "validation_examples": 200,
+  "validation_cross_entropy": 0.9865586768565587,
+  "seconds": 11.721576182171702,
+  "precision": "FP32 parameters and BF16 autocast, matching training validation",
+  "git_commit": "2160b8f0f974d85dc0823cb48cc4d22c3daabab9",
+  "versions": {
+    "torch": "2.5.1+cu124",
+    "transformers": "4.57.1",
+    "trl": "0.24.0",
+    "datasets": "4.3.0",
+    "lm_eval": "0.4.9.2",
+    "accelerate": "1.10.1"
+  },
+  "cuda_visible_devices": "0",
+  "gpus": [
+    "NVIDIA GeForce RTX 3090"
+  ]
+}

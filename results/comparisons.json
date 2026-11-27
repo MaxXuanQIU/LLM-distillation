@@ -1,0 +1,276 @@
+{
+  "bootstrap_replicates": 10000,
+  "method": "paired bootstrap; resample prompts for IFEval, questions for ARC; unadjusted intervals",
+  "intervals": {
+    "Teacher": {
+      "ifeval_strict_prompt_accuracy": [
+        0.7837338262476895,
+        0.8484288354898336
+      ],
+      "ifeval_strict_instruction_accuracy": [
+        0.8452229453207674,
+        0.8914847561885567
+      ],
+      "arc_accuracy": [
+        0.8325,
+        0.9
+      ]
+    },
+    "E0": {
+      "ifeval_strict_prompt_accuracy": [
+        0.5434380776340111,
+        0.6284658040665434
+      ],
+      "ifeval_strict_instruction_accuracy": [
+        0.6521199569661108,
+        0.7146342213422134
+      ],
+      "arc_accuracy": [
+        0.42,
+        0.52
+      ]
+    },
+    "E1": {
+      "ifeval_strict_prompt_accuracy": [
+        0.4399260628465804,
+        0.5268022181146026
+      ],
+      "ifeval_strict_instruction_accuracy": [
+        0.5480769230769231,
+        0.6157575757575757
+      ],
+      "arc_accuracy": [
+        0.3325,
+        0.425
+      ]
+    },
+    "E2": {
+      "ifeval_strict_prompt_accuracy": [
+        0.4288354898336414,
+        0.5138632162661737
+      ],
+      "ifeval_strict_instruction_accuracy": [
+        0.5414235705950992,
+        0.6079141937325285
+      ],
+      "arc_accuracy": [
+        0.32,
+        0.415
+      ]
+    },
+    "E3": {
+      "ifeval_strict_prompt_accuracy": [
+        0.4510166358595194,
+        0.5360443622920518
+      ],
+      "ifeval_strict_instruction_accuracy": [
+        0.5638547808254294,
+        0.6302526221406677
+      ],
+      "arc_accuracy": [
+        0.3275,
+        0.425
+      ]
+    },
+    "E4": {
+      "ifeval_strict_prompt_accuracy": [
+        0.4491682070240296,
+        0.532347504621072
+      ],
+      "ifeval_strict_instruction_accuracy": [
+        0.5616605616605617,
+        0.6287452837850808
+      ],
+      "arc_accuracy": [
+        0.3025,
+        0.395
+      ]
+    }
+  },
+  "comparisons": {
+    "E1-E0": {
+      "ifeval_strict_prompt_accuracy": {
+        "delta": -0.10351201478743066,
+        "ci95": [
+          -0.14417744916820702,
+          -0.06284658040665436
+        ]
+      },
+      "ifeval_strict_instruction_accuracy": {
+        "delta": -0.10191846522781767,
+        "ci95": [
+          -0.13526624511870336,
+          -0.06815439685956984
+        ]
+      },
+      "arc_accuracy": {
+        "delta": -0.09249999999999997,
+        "ci95": [
+          -0.13249999999999995,
+          -0.05499999999999999
+        ]
+      }
+    },
+    "E2-E0": {
+      "ifeval_strict_prompt_accuracy": {
+        "delta": -0.11460258780036964,
+        "ci95": [
+          -0.15341959334565614,
+          -0.077634011090573
+        ]
+      },
+      "ifeval_strict_instruction_accuracy": {
+        "delta": -0.10911270983213428,
+        "ci95": [
+          -0.14181818181818173,
+          -0.07739521177021183
+        ]
+      },
+      "arc_accuracy": {
+        "delta": -0.10249999999999998,
+        "ci95": [
+          -0.14250000000000002,
+          -0.0625
+        ]
+      }
+    },
+    "E3-E0": {
+      "ifeval_strict_prompt_accuracy": {
+        "delta": -0.09242144177449169,
+        "ci95": [
+          -0.13123844731977824,
+          -0.055452865064694934
+        ]
+      },
+      "ifeval_strict_instruction_accuracy": {
+        "delta": -0.08633093525179858,
+        "ci95": [
+          -0.11967055226040803,
+          -0.0534624714632464
+        ]
+      },
+      "arc_accuracy": {
+        "delta": -0.09499999999999997,
+        "ci95": [
+          -0.13499999999999995,
+          -0.05499999999999999
+        ]
+      }
+    },
+    "E4-E0": {
+      "ifeval_strict_prompt_accuracy": {
+        "delta": -0.09426987060998149,
+        "ci95": [
+          -0.1349353049907578,
+          -0.05360443622920519
+        ]
+      },
+      "ifeval_strict_instruction_accuracy": {
+        "delta": -0.08752997601918466,
+        "ci95": [
+          -0.12,
+          -0.05555555555555558
+        ]
+      },
+      "arc_accuracy": {
+        "delta": -0.1225,
+        "ci95": [
+          -0.16749999999999998,
+          -0.07750000000000001
+        ]
+      }
+    },
+    "E2-E1": {
+      "ifeval_strict_prompt_accuracy": {
+        "delta": -0.011090573012938976,
+        "ci95": [
+          -0.0388170055452865,
+          0.01663585951940849
+        ]
+      },
+      "ifeval_strict_instruction_accuracy": {
+        "delta": -0.007194244604316613,
+        "ci95": [
+          -0.029852085267442666,
+          0.015795868772782495
+        ]
+      },
+      "arc_accuracy": {
+        "delta": -0.010000000000000009,
+        "ci95": [
+          -0.030000000000000027,
+          0.010000000000000009
+        ]
+      }
+    },
+    "E4-E2": {
+      "ifeval_strict_prompt_accuracy": {
+        "delta": 0.02033271719038815,
+        "ci95": [
+          -0.012939001848428833,
+          0.051756007393715386
+        ]
+      },
+      "ifeval_strict_instruction_accuracy": {
+        "delta": 0.021582733812949617,
+        "ci95": [
+          -0.007246376811594235,
+          0.049763033175355464
+        ]
+      },
+      "arc_accuracy": {
+        "delta": -0.020000000000000018,
+        "ci95": [
+          -0.04249999999999998,
+          0.0
+        ]
+      }
+    },
+    "E3-E2": {
+      "ifeval_strict_prompt_accuracy": {
+        "delta": 0.02218114602587795,
+        "ci95": [
+          -0.011090573012938976,
+          0.05360443622920519
+        ]
+      },
+      "ifeval_strict_instruction_accuracy": {
+        "delta": 0.0227817745803357,
+        "ci95": [
+          -0.0036102170414510524,
+          0.048661800486617945
+        ]
+      },
+      "arc_accuracy": {
+        "delta": 0.007500000000000007,
+        "ci95": [
+          -0.012500000000000011,
+          0.02999999999999997
+        ]
+      }
+    },
+    "E3-E4": {
+      "ifeval_strict_prompt_accuracy": {
+        "delta": 0.0018484288354898015,
+        "ci95": [
+          -0.027726432532347522,
+          0.03142329020332724
+        ]
+      },
+      "ifeval_strict_instruction_accuracy": {
+        "delta": 0.0011990407673860837,
+        "ci95": [
+          -0.024420024420024444,
+          0.02699390103401602
+        ]
+      },
+      "arc_accuracy": {
+        "delta": 0.027500000000000024,
+        "ci95": [
+          0.0,
+          0.05499999999999999
+        ]
+      }
+    }
+  }
+}

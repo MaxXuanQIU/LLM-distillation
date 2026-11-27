@@ -1,0 +1,8 @@
+{
+  "response_tokens": 16384,
+  "prompt_tokens": 483,
+  "peak_gb": [
+    11.373819904,
+    9.400965632
+  ]
+}

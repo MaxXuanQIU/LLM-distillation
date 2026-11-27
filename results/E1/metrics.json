@@ -1,0 +1,30 @@
+{
+  "name": "E1",
+  "ifeval_prompts": 541,
+  "ifeval_instructions": 834,
+  "ifeval_strict_prompt_accuracy": 0.4824399260628466,
+  "ifeval_strict_instruction_accuracy": 0.5815347721822542,
+  "arc_accuracy": 0.3775,
+  "arc_examples": 400,
+  "ifeval_truncated": 128,
+  "evaluation_seconds_this_session": 47594.405663434416,
+  "protocol": {
+    "thinking": false,
+    "ifeval_decoding": "greedy",
+    "ifeval_max_tokens": 16384,
+    "arc": "zero-shot chat; argmax next-token A-E logprob; fixed seeded test subset"
+  },
+  "git_commit": "2160b8f0f974d85dc0823cb48cc4d22c3daabab9",
+  "versions": {
+    "torch": "2.5.1+cu124",
+    "transformers": "4.57.1",
+    "trl": "0.24.0",
+    "datasets": "4.3.0",
+    "lm_eval": "0.4.9.2",
+    "accelerate": "1.10.1"
+  },
+  "cuda_visible_devices": "0",
+  "gpus": [
+    "NVIDIA GeForce RTX 3090"
+  ]
+}

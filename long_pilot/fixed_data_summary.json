@@ -1,0 +1,30 @@
+{
+  "train": {
+    "responses": 5000,
+    "natural_eos": 4990,
+    "capped": 10,
+    "tokens": 4728146,
+    "mean_tokens": 945.6292,
+    "median_tokens": 847.0,
+    "p95_tokens": 1958.05,
+    "max_tokens": 16384,
+    "answers_longer_than_1024": 1886,
+    "supervised_tokens_after_1024": 1101675,
+    "tokens_in_capped_answers": 163840,
+    "capped_with_exact_period_at_most_128_in_final_512_tokens": 7
+  },
+  "validation": {
+    "responses": 200,
+    "natural_eos": 200,
+    "capped": 0,
+    "tokens": 185826,
+    "mean_tokens": 929.13,
+    "median_tokens": 862.5,
+    "p95_tokens": 1949.3,
+    "max_tokens": 6310,
+    "answers_longer_than_1024": 73,
+    "supervised_tokens_after_1024": 42063,
+    "tokens_in_capped_answers": 0,
+    "capped_with_exact_period_at_most_128_in_final_512_tokens": 0
+  }
+}

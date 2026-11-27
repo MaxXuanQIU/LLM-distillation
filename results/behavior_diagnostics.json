@@ -1,0 +1,22 @@
+{
+  "E1": {
+    "baseline_fail_to_pass": 36,
+    "baseline_pass_to_fail": 92,
+    "regressions_reaching_evaluation_cap": 44
+  },
+  "E2": {
+    "baseline_fail_to_pass": 28,
+    "baseline_pass_to_fail": 90,
+    "regressions_reaching_evaluation_cap": 38
+  },
+  "E3": {
+    "baseline_fail_to_pass": 33,
+    "baseline_pass_to_fail": 83,
+    "regressions_reaching_evaluation_cap": 25
+  },
+  "E4": {
+    "baseline_fail_to_pass": 37,
+    "baseline_pass_to_fail": 88,
+    "regressions_reaching_evaluation_cap": 22
+  }
+}

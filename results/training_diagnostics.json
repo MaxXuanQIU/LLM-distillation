@@ -1,0 +1,91 @@
+{
+  "E1": {
+    "first_20_steps_mean_loss": 0.9360491699432151,
+    "last_20_steps_mean_loss": 0.9046162114154003,
+    "max_preclip_gradient_norm": 5.9380035400390625,
+    "training_capped_responses": 10,
+    "lengths_by_source": {
+      "teacher": {
+        "answers": 5000,
+        "tokens": 4728146,
+        "answers_longer_than_1024": 1886,
+        "tokens_after_1024": 1101675,
+        "capped_answers": 10,
+        "tokens_in_capped_answers": 163840,
+        "capped_with_periodic_tail": 7
+      }
+    },
+    "examples": 5000,
+    "generation_fraction_of_training_time": 0.0,
+    "training_wall_minutes": 27.80840451613379
+  },
+  "E2": {
+    "first_20_steps_mean_loss": 0.6597845034373842,
+    "last_20_steps_mean_loss": 0.6180254056836794,
+    "max_preclip_gradient_norm": 5.7914137840271,
+    "training_capped_responses": 10,
+    "lengths_by_source": {
+      "teacher": {
+        "answers": 5000,
+        "tokens": 4728146,
+        "answers_longer_than_1024": 1886,
+        "tokens_after_1024": 1101675,
+        "capped_answers": 10,
+        "tokens_in_capped_answers": 163840,
+        "capped_with_periodic_tail": 7
+      }
+    },
+    "examples": 5000,
+    "generation_fraction_of_training_time": 0.0,
+    "training_wall_minutes": 46.07417418745657
+  },
+  "E3": {
+    "first_20_steps_mean_loss": 0.44177087305531515,
+    "last_20_steps_mean_loss": 0.5178568209968125,
+    "max_preclip_gradient_norm": 7.928508758544922,
+    "training_capped_responses": 110,
+    "lengths_by_source": {
+      "teacher": {
+        "answers": 2432,
+        "tokens": 2265050,
+        "answers_longer_than_1024": 901,
+        "tokens_after_1024": 518282,
+        "capped_answers": 4,
+        "tokens_in_capped_answers": 65536,
+        "capped_with_periodic_tail": 2
+      },
+      "student": {
+        "answers": 2568,
+        "tokens": 4067796,
+        "answers_longer_than_1024": 1035,
+        "tokens_after_1024": 2163561,
+        "capped_answers": 106,
+        "tokens_in_capped_answers": 1736704,
+        "capped_with_periodic_tail": 85
+      }
+    },
+    "examples": 5000,
+    "generation_fraction_of_training_time": 0.9447034319024836,
+    "training_wall_minutes": 1112.8814624481834
+  },
+  "E4": {
+    "first_20_steps_mean_loss": 0.3797188669747927,
+    "last_20_steps_mean_loss": 0.4011995933390106,
+    "max_preclip_gradient_norm": 7.239129543304443,
+    "training_capped_responses": 156,
+    "lengths_by_source": {
+      "student": {
+        "answers": 5000,
+        "tokens": 7248807,
+        "answers_longer_than_1024": 2020,
+        "tokens_after_1024": 3510883,
+        "capped_answers": 156,
+        "tokens_in_capped_answers": 2555904,
+        "capped_with_periodic_tail": 137
+      }
+    },
+    "examples": 5000,
+    "generation_fraction_of_training_time": 0.960540730953994,
+    "training_wall_minutes": 1741.9152393759693
+  }
+}

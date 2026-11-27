@@ -1,0 +1,61 @@
+{
+  "train_count": 5000,
+  "validation_count": 200,
+  "disjoint_unique_prompts": true,
+  "fixed_train_completion_tokens": 4728146,
+  "teacher_train_truncated": 10,
+  "data_sha256": {
+    "data/arc.jsonl": "65bd8d4cd77d089c0ae70b7aa31155d481a7da7690aa37eccaa5decfbf499140",
+    "data/ifeval.jsonl": "99cda8d6ad20d34ac8a3c3330b8bc3fd480deb44dc28d4e53f8e6c6a0c900004",
+    "data/teacher_0.jsonl": "9d52a271938e726c790860f78cf835688c076cffd7ebd4da12e7d0869047bc82",
+    "data/teacher_1.jsonl": "f078039f90f9e695882a16c71f5c9c6f7641a373365d95847baf81c5832e96bf",
+    "data/teacher_2.jsonl": "63b287e400e875a50c2bc217945820292abd06d114a68131c83ecc757be7ccd0",
+    "data/teacher_3.jsonl": "77913034fb772e3199175bd31ecb8e28822ec27596bc40d313f694cfde12c762",
+    "data/train.jsonl": "08ed2b6dc9578070cf3dac5b77377542cf9749e8047386bcd1c07ec3d6827a61",
+    "data/train_prompts.jsonl": "e8f24552d80629bbb667e8d8e5a0ef0e259d05a0ae410a45028dbb01cdad1965",
+    "data/validation.jsonl": "c26ce937c8976c40081539138196e2488cce60ad67a65353b9adc09e6828c806",
+    "data/validation_prompts.jsonl": "7775873ca4aa30433e0af80f6c20789faa4b78156eaecc58ac88a7a90e302c2a"
+  },
+  "prepared_data_unchanged": true,
+  "fixed_teacher_dataset_unchanged": true,
+  "original_model_files_unchanged": true,
+  "experiments": {
+    "E1": {
+      "examples": 5000,
+      "on_policy_examples": 0,
+      "truncated_completions": 10,
+      "completion_tokens": 4728146,
+      "checkpoint_sha256": {
+        "model.safetensors": "c1e478af8bfa89ace006cbae1debc04cf7865fce43fd0ceda474d67457cea791"
+      }
+    },
+    "E2": {
+      "examples": 5000,
+      "on_policy_examples": 0,
+      "truncated_completions": 10,
+      "completion_tokens": 4728146,
+      "checkpoint_sha256": {
+        "model.safetensors": "3288ad70549dde3b6ce0d78c76e28c0284787f8916c3bc1f78337ce16b65e5a7"
+      }
+    },
+    "E3": {
+      "examples": 5000,
+      "on_policy_examples": 2568,
+      "truncated_completions": 110,
+      "completion_tokens": 6332846,
+      "checkpoint_sha256": {
+        "model.safetensors": "b1a15ac6cd656d71e888ca145af39d64ef94286139196f88fff5521a97038c4d"
+      }
+    },
+    "E4": {
+      "examples": 5000,
+      "on_policy_examples": 5000,
+      "truncated_completions": 156,
+      "completion_tokens": 7248807,
+      "checkpoint_sha256": {
+        "model.safetensors": "488de3b652032cef2a4a3bc07409d64c7fb9bb1da6d2db6cf03a512197be7daa"
+      }
+    }
+  },
+  "frozen_model_run_revision": "2160b8f0f974d85dc0823cb48cc4d22c3daabab9"
+}

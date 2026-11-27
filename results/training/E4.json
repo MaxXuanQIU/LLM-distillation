@@ -1,0 +1,2429 @@
+{
+  "summary": {
+    "experiment": "E4",
+    "lambda": 1.0,
+    "optimizer_steps": 157,
+    "examples": 5000,
+    "completion_tokens": 7248807,
+    "on_policy_examples": 5000,
+    "training_seconds": 104514.91436255816,
+    "generation_seconds": 100390.8322374057,
+    "allocated_gpu_hours": 58.06384131253231,
+    "validation_cross_entropy": 0.9293534879928838,
+    "peak_memory_gb": [
+      13.741650944,
+      9.399537152
+    ]
+  },
+  "history": [
+    {
+      "step": 1,
+      "loss": 0.35226178948038167,
+      "lr": 0.0,
+      "grad_norm": 3.5093345642089844,
+      "tokens": 33951,
+      "total_tokens": 33951,
+      "on_policy_examples": 32,
+      "generation_seconds": 598.028197077103,
+      "seconds": 617.5022264933214,
+      "peak_memory_gb": [
+        10.798498816,
+        9.373658112
+      ]
+    },
+    {
+      "step": 2,
+      "loss": 0.6791053997789831,
+      "lr": 1.25e-06,
+      "grad_norm": 7.239129543304443,
+      "tokens": 15136,
+      "total_tokens": 49087,
+      "on_policy_examples": 32,
+      "generation_seconds": 77.52007024548948,
+      "seconds": 704.4282821360976,
+      "peak_memory_gb": [
+        12.831532032,
+        9.373658112
+      ]
+    },
+    {
+      "step": 3,
+      "loss": 0.5719936028126874,
+      "lr": 2.5e-06,
+      "grad_norm": 6.102078914642334,
+      "tokens": 22506,
+      "total_tokens": 71593,
+      "on_policy_examples": 32,
+      "generation_seconds": 173.5091875521466,
+      "seconds": 891.2200515121222,
+      "peak_memory_gb": [
+        13.410233856,
+        9.373658112
+      ]
+    },
+    {
+      "step": 4,
+      "loss": 0.6231232058759816,
+      "lr": 3.7500000000000005e-06,
+      "grad_norm": 6.774484157562256,
+      "tokens": 19006,
+      "total_tokens": 90599,
+      "on_policy_examples": 32,
+      "generation_seconds": 148.36520573496819,
+      "seconds": 1050.4085184652358,
+      "peak_memory_gb": [
+        13.410233856,
+        9.373658112
+      ]
+    },
+    {
+      "step": 5,
+      "loss": 0.6981911756629836,
+      "lr": 5e-06,
+      "grad_norm": 6.3244309425354,
+      "tokens": 18067,
+      "total_tokens": 108666,
+      "on_policy_examples": 32,
+      "generation_seconds": 97.8280712692067,
+      "seconds": 1158.6674009300768,
+      "peak_memory_gb": [
+        13.410233856,
+        9.373658112
+      ]
+    },
+    {
+      "step": 6,
+      "loss": 0.6515459399388208,
+      "lr": 6.25e-06,
+      "grad_norm": 4.670713901519775,
+      "tokens": 21719,
+      "total_tokens": 130385,
+      "on_policy_examples": 32,
+      "generation_seconds": 111.98784968908876,
+      "seconds": 1283.063605000265,
+      "peak_memory_gb": [
+        13.410233856,
+        9.373658112
+      ]
+    },
+    {
+      "step": 7,
+      "loss": 0.2875476354149914,
+      "lr": 7.500000000000001e-06,
+      "grad_norm": 1.362442970275879,
+      "tokens": 66065,
+      "total_tokens": 196450,
+      "on_policy_examples": 32,
+      "generation_seconds": 1064.9455500170588,
+      "seconds": 2384.893192176707,
+      "peak_memory_gb": [
+        13.674622976,
+        9.37421312
+      ]
+    },
+    {
+      "step": 8,
+      "loss": 0.13362815798175193,
+      "lr": 8.750000000000001e-06,
+      "grad_norm": 0.8454999923706055,
+      "tokens": 130233,
+      "total_tokens": 326683,
+      "on_policy_examples": 32,
+      "generation_seconds": 2735.2243754388765,
+      "seconds": 5193.817277806811,
+      "peak_memory_gb": [
+        13.6767232,
+        9.37500672
+      ]
+    },
+    {
+      "step": 9,
+      "loss": 0.21123636107746685,
+      "lr": 1e-05,
+      "grad_norm": 1.4874356985092163,
+      "tokens": 106384,
+      "total_tokens": 433067,
+      "on_policy_examples": 32,
+      "generation_seconds": 1805.1710356287658,
+      "seconds": 7058.611564923078,
+      "peak_memory_gb": [
+        13.6767232,
+        9.37500672
+      ]
+    },
+    {
+      "step": 10,
+      "loss": 0.09345132911871666,
+      "lr": 9.99888864929809e-06,
+      "grad_norm": 0.7476324439048767,
+      "tokens": 178642,
+      "total_tokens": 611709,
+      "on_policy_examples": 32,
+      "generation_seconds": 3981.4355487767607,
+      "seconds": 11140.403266784735,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 11,
+      "loss": 0.07349328016457196,
+      "lr": 9.995555091232516e-06,
+      "grad_norm": 0.6487375497817993,
+      "tokens": 210301,
+      "total_tokens": 822010,
+      "on_policy_examples": 32,
+      "generation_seconds": 4948.364025426097,
+      "seconds": 16205.352815606631,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 12,
+      "loss": 0.07778849461028373,
+      "lr": 9.990000807704114e-06,
+      "grad_norm": 0.5946685671806335,
+      "tokens": 187289,
+      "total_tokens": 1009299,
+      "on_policy_examples": 32,
+      "generation_seconds": 4147.564312141389,
+      "seconds": 20458.3450422585,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 13,
+      "loss": 0.11835553807073096,
+      "lr": 9.982228267815644e-06,
+      "grad_norm": 0.9996321797370911,
+      "tokens": 120316,
+      "total_tokens": 1129615,
+      "on_policy_examples": 32,
+      "generation_seconds": 2360.5859592845663,
+      "seconds": 22885.63732196763,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 14,
+      "loss": 0.15962700375174402,
+      "lr": 9.972240926774167e-06,
+      "grad_norm": 1.055896520614624,
+      "tokens": 77452,
+      "total_tokens": 1207067,
+      "on_policy_examples": 32,
+      "generation_seconds": 1495.5424046674743,
+      "seconds": 24424.421575793996,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 15,
+      "loss": 0.2306434302873946,
+      "lr": 9.960043224355081e-06,
+      "grad_norm": 1.4489961862564087,
+      "tokens": 60831,
+      "total_tokens": 1267898,
+      "on_policy_examples": 32,
+      "generation_seconds": 1022.4214202165604,
+      "seconds": 25480.35981289856,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 16,
+      "loss": 0.373170249514412,
+      "lr": 9.945640582928438e-06,
+      "grad_norm": 2.0539209842681885,
+      "tokens": 44962,
+      "total_tokens": 1312860,
+      "on_policy_examples": 32,
+      "generation_seconds": 636.7920262031257,
+      "seconds": 26141.426549465396,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 17,
+      "loss": 0.6202544641430423,
+      "lr": 9.929039405048502e-06,
+      "grad_norm": 2.712496042251587,
+      "tokens": 22979,
+      "total_tokens": 1335839,
+      "on_policy_examples": 32,
+      "generation_seconds": 118.3360185213387,
+      "seconds": 26272.535558900796,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 18,
+      "loss": 0.6478352312181817,
+      "lr": 9.91024707060755e-06,
+      "grad_norm": 2.8853378295898438,
+      "tokens": 23424,
+      "total_tokens": 1359263,
+      "on_policy_examples": 32,
+      "generation_seconds": 126.56838262453675,
+      "seconds": 26412.272313664667,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 19,
+      "loss": 0.3898924272294736,
+      "lr": 9.889271933555214e-06,
+      "grad_norm": 1.7897943258285522,
+      "tokens": 36606,
+      "total_tokens": 1395869,
+      "on_policy_examples": 32,
+      "generation_seconds": 597.542084492743,
+      "seconds": 27029.867921554483,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 20,
+      "loss": 0.601232623363253,
+      "lr": 9.866123318184803e-06,
+      "grad_norm": 2.6502161026000977,
+      "tokens": 28305,
+      "total_tokens": 1424174,
+      "on_policy_examples": 32,
+      "generation_seconds": 179.05856883712113,
+      "seconds": 27225.021112671122,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 21,
+      "loss": 0.2964231129614761,
+      "lr": 9.840811514988294e-06,
+      "grad_norm": 1.3300294876098633,
+      "tokens": 59446,
+      "total_tokens": 1483620,
+      "on_policy_examples": 32,
+      "generation_seconds": 1010.712958227843,
+      "seconds": 28268.479605628178,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 22,
+      "loss": 0.5430118040967475,
+      "lr": 9.81334777608179e-06,
+      "grad_norm": 2.3693346977233887,
+      "tokens": 30139,
+      "total_tokens": 1513759,
+      "on_policy_examples": 32,
+      "generation_seconds": 234.13371130544692,
+      "seconds": 28518.787498908117,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 23,
+      "loss": 0.46219294080127044,
+      "lr": 9.783744310203492e-06,
+      "grad_norm": 1.9673680067062378,
+      "tokens": 34176,
+      "total_tokens": 1547935,
+      "on_policy_examples": 32,
+      "generation_seconds": 318.96797339618206,
+      "seconds": 28855.76159651205,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 24,
+      "loss": 0.2506226139210648,
+      "lr": 9.752014277286433e-06,
+      "grad_norm": 1.043755054473877,
+      "tokens": 65528,
+      "total_tokens": 1613463,
+      "on_policy_examples": 32,
+      "generation_seconds": 1157.17800527066,
+      "seconds": 30048.822285380214,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 25,
+      "loss": 0.1899465345200452,
+      "lr": 9.718171782608355e-06,
+      "grad_norm": 0.8172546029090881,
+      "tokens": 77492,
+      "total_tokens": 1690955,
+      "on_policy_examples": 32,
+      "generation_seconds": 1435.9241638621315,
+      "seconds": 31526.746938516386,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 26,
+      "loss": 0.19766528577213968,
+      "lr": 9.682231870521347e-06,
+      "grad_norm": 0.8524326682090759,
+      "tokens": 75361,
+      "total_tokens": 1766316,
+      "on_policy_examples": 32,
+      "generation_seconds": 1430.2393467156217,
+      "seconds": 32998.70761974808,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 27,
+      "loss": 0.3190926721226585,
+      "lr": 9.644210517764014e-06,
+      "grad_norm": 1.3730498552322388,
+      "tokens": 43375,
+      "total_tokens": 1809691,
+      "on_policy_examples": 32,
+      "generation_seconds": 667.3240642240271,
+      "seconds": 33691.717170922086,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 28,
+      "loss": 0.5471291126850937,
+      "lr": 9.60412462635919e-06,
+      "grad_norm": 2.1875994205474854,
+      "tokens": 31766,
+      "total_tokens": 1841457,
+      "on_policy_examples": 32,
+      "generation_seconds": 195.58445107843727,
+      "seconds": 33904.474002634175,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 29,
+      "loss": 0.35946031479698426,
+      "lr": 9.561992016100293e-06,
+      "grad_norm": 1.3169395923614502,
+      "tokens": 52489,
+      "total_tokens": 1893946,
+      "on_policy_examples": 32,
+      "generation_seconds": 678.775245802477,
+      "seconds": 34612.32892489899,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 30,
+      "loss": 0.5608261606456506,
+      "lr": 9.517831416629717e-06,
+      "grad_norm": 2.1506924629211426,
+      "tokens": 27481,
+      "total_tokens": 1921427,
+      "on_policy_examples": 32,
+      "generation_seconds": 154.966880091466,
+      "seconds": 34782.81157128047,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 31,
+      "loss": 0.5108954699004351,
+      "lr": 9.471662459112747e-06,
+      "grad_norm": 1.9558463096618652,
+      "tokens": 32868,
+      "total_tokens": 1954295,
+      "on_policy_examples": 32,
+      "generation_seconds": 194.94930311106145,
+      "seconds": 34996.386248209514,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 32,
+      "loss": 0.55572853871835,
+      "lr": 9.423505667510724e-06,
+      "grad_norm": 2.4063825607299805,
+      "tokens": 22349,
+      "total_tokens": 1976644,
+      "on_policy_examples": 32,
+      "generation_seconds": 148.53565309476107,
+      "seconds": 35158.17045574915,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 33,
+      "loss": 0.5169490138178073,
+      "lr": 9.373382449457305e-06,
+      "grad_norm": 1.9167156219482422,
+      "tokens": 28039,
+      "total_tokens": 2004683,
+      "on_policy_examples": 32,
+      "generation_seconds": 161.34781674388796,
+      "seconds": 35336.045948106796,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 34,
+      "loss": 0.3399049224840118,
+      "lr": 9.321315086741916e-06,
+      "grad_norm": 1.347901701927185,
+      "tokens": 45556,
+      "total_tokens": 2050239,
+      "on_policy_examples": 32,
+      "generation_seconds": 664.2499717585742,
+      "seconds": 36025.81604154967,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 35,
+      "loss": 0.5824557329277122,
+      "lr": 9.2673267254046e-06,
+      "grad_norm": 2.278996706008911,
+      "tokens": 24364,
+      "total_tokens": 2074603,
+      "on_policy_examples": 32,
+      "generation_seconds": 183.0223866989836,
+      "seconds": 36223.03059714101,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 36,
+      "loss": 0.5875205088670011,
+      "lr": 9.211441365446661e-06,
+      "grad_norm": 2.0709421634674072,
+      "tokens": 31024,
+      "total_tokens": 2105627,
+      "on_policy_examples": 32,
+      "generation_seconds": 168.8768609892577,
+      "seconds": 36407.92234928161,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 37,
+      "loss": 0.5199325779726546,
+      "lr": 9.153683850161706e-06,
+      "grad_norm": 1.876586675643921,
+      "tokens": 34615,
+      "total_tokens": 2140242,
+      "on_policy_examples": 32,
+      "generation_seconds": 232.85312244389206,
+      "seconds": 36661.01898029819,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 38,
+      "loss": 0.49923000609779156,
+      "lr": 9.094079855091797e-06,
+      "grad_norm": 1.8008023500442505,
+      "tokens": 33055,
+      "total_tokens": 2173297,
+      "on_policy_examples": 32,
+      "generation_seconds": 241.6522374264896,
+      "seconds": 36922.88899827469,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 39,
+      "loss": 0.6057268242287278,
+      "lr": 9.032655876613636e-06,
+      "grad_norm": 2.3143362998962402,
+      "tokens": 23098,
+      "total_tokens": 2196395,
+      "on_policy_examples": 32,
+      "generation_seconds": 122.00340291298926,
+      "seconds": 37057.2753795078,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 40,
+      "loss": 0.37017544195809005,
+      "lr": 8.969439220159861e-06,
+      "grad_norm": 1.3071339130401611,
+      "tokens": 50934,
+      "total_tokens": 2247329,
+      "on_policy_examples": 32,
+      "generation_seconds": 739.4613576950505,
+      "seconds": 37825.44950374868,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 41,
+      "loss": 0.3624677179317838,
+      "lr": 8.904457988080682e-06,
+      "grad_norm": 1.3252737522125244,
+      "tokens": 46791,
+      "total_tokens": 2294120,
+      "on_policy_examples": 32,
+      "generation_seconds": 671.4048715382814,
+      "seconds": 38522.794339850545,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 42,
+      "loss": 0.36239171149781546,
+      "lr": 8.837741067151251e-06,
+      "grad_norm": 1.2149138450622559,
+      "tokens": 55075,
+      "total_tokens": 2349195,
+      "on_policy_examples": 32,
+      "generation_seconds": 757.6094021443278,
+      "seconds": 39312.87380394805,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 43,
+      "loss": 0.32846669210098756,
+      "lr": 8.76931811573033e-06,
+      "grad_norm": 1.5626795291900635,
+      "tokens": 42642,
+      "total_tokens": 2391837,
+      "on_policy_examples": 32,
+      "generation_seconds": 668.6240384690464,
+      "seconds": 40005.967078260146,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 44,
+      "loss": 0.378830989404927,
+      "lr": 8.699219550575954e-06,
+      "grad_norm": 1.2879258394241333,
+      "tokens": 46573,
+      "total_tokens": 2438410,
+      "on_policy_examples": 32,
+      "generation_seconds": 665.5095508042723,
+      "seconds": 40696.66267796513,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 45,
+      "loss": 0.5229223732733629,
+      "lr": 8.627476533323957e-06,
+      "grad_norm": 1.9577335119247437,
+      "tokens": 29320,
+      "total_tokens": 2467730,
+      "on_policy_examples": 32,
+      "generation_seconds": 149.47756172250956,
+      "seconds": 40863.03673005756,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 46,
+      "loss": 0.5120959473689781,
+      "lr": 8.554120956635375e-06,
+      "grad_norm": 1.7931993007659912,
+      "tokens": 35433,
+      "total_tokens": 2503163,
+      "on_policy_examples": 32,
+      "generation_seconds": 184.28870201762766,
+      "seconds": 41067.363089310005,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 47,
+      "loss": 0.3327986990117927,
+      "lr": 8.47918543001886e-06,
+      "grad_norm": 1.246479868888855,
+      "tokens": 49848,
+      "total_tokens": 2553011,
+      "on_policy_examples": 32,
+      "generation_seconds": 676.0181873543188,
+      "seconds": 41771.85143538006,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 48,
+      "loss": 0.5278317733290258,
+      "lr": 8.402703265334455e-06,
+      "grad_norm": 1.9392988681793213,
+      "tokens": 29817,
+      "total_tokens": 2582828,
+      "on_policy_examples": 32,
+      "generation_seconds": 202.21243414469063,
+      "seconds": 41991.70915968623,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 49,
+      "loss": 0.4922364394603824,
+      "lr": 8.324708461985124e-06,
+      "grad_norm": 1.6549383401870728,
+      "tokens": 35524,
+      "total_tokens": 2618352,
+      "on_policy_examples": 32,
+      "generation_seconds": 191.48185110650957,
+      "seconds": 42203.29470701236,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 50,
+      "loss": 0.46838986773666974,
+      "lr": 8.245235691802644e-06,
+      "grad_norm": 1.6002321243286133,
+      "tokens": 40786,
+      "total_tokens": 2659138,
+      "on_policy_examples": 32,
+      "generation_seconds": 314.04595902655274,
+      "seconds": 42539.85123876296,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 51,
+      "loss": 0.5577484758741057,
+      "lr": 8.164320283634585e-06,
+      "grad_norm": 2.01086163520813,
+      "tokens": 28968,
+      "total_tokens": 2688106,
+      "on_policy_examples": 32,
+      "generation_seconds": 182.39377814158797,
+      "seconds": 42751.43043447379,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 52,
+      "loss": 0.5360010922390821,
+      "lr": 8.081998207639212e-06,
+      "grad_norm": 2.029879331588745,
+      "tokens": 29822,
+      "total_tokens": 2717928,
+      "on_policy_examples": 32,
+      "generation_seconds": 178.83529061079025,
+      "seconds": 42946.947946712375,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 53,
+      "loss": 0.3421738946767583,
+      "lr": 7.998306059295302e-06,
+      "grad_norm": 1.2556976079940796,
+      "tokens": 44322,
+      "total_tokens": 2762250,
+      "on_policy_examples": 32,
+      "generation_seconds": 607.7414163826033,
+      "seconds": 43579.01019093115,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 54,
+      "loss": 0.5430912767628008,
+      "lr": 7.913281043133978e-06,
+      "grad_norm": 2.010943651199341,
+      "tokens": 28348,
+      "total_tokens": 2790598,
+      "on_policy_examples": 32,
+      "generation_seconds": 182.04459373187274,
+      "seconds": 43777.80214257445,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 55,
+      "loss": 0.48489020400452504,
+      "lr": 7.826960956199796e-06,
+      "grad_norm": 1.6650924682617188,
+      "tokens": 36139,
+      "total_tokens": 2826737,
+      "on_policy_examples": 32,
+      "generation_seconds": 190.65918915905058,
+      "seconds": 43987.9726698203,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 56,
+      "loss": 0.34369997060023677,
+      "lr": 7.739384171248436e-06,
+      "grad_norm": 1.2588222026824951,
+      "tokens": 44610,
+      "total_tokens": 2871347,
+      "on_policy_examples": 32,
+      "generation_seconds": 680.3364050295204,
+      "seconds": 44693.63320698403,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 57,
+      "loss": 0.3490441766829003,
+      "lr": 7.650589619688468e-06,
+      "grad_norm": 1.2214044332504272,
+      "tokens": 50567,
+      "total_tokens": 2921914,
+      "on_policy_examples": 32,
+      "generation_seconds": 710.7680080765858,
+      "seconds": 45433.519754899666,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 58,
+      "loss": 0.5815202731706638,
+      "lr": 7.560616774274775e-06,
+      "grad_norm": 2.2105846405029297,
+      "tokens": 26936,
+      "total_tokens": 2948850,
+      "on_policy_examples": 32,
+      "generation_seconds": 182.2570479819551,
+      "seconds": 45631.50583473779,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 59,
+      "loss": 0.5155599612935281,
+      "lr": 7.469505631561318e-06,
+      "grad_norm": 1.8123642206192017,
+      "tokens": 34561,
+      "total_tokens": 2983411,
+      "on_policy_examples": 32,
+      "generation_seconds": 197.64915880188346,
+      "seconds": 45848.943482370116,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 60,
+      "loss": 0.4109924085128336,
+      "lr": 7.3772966941210585e-06,
+      "grad_norm": 1.3140404224395752,
+      "tokens": 46711,
+      "total_tokens": 3030122,
+      "on_policy_examples": 32,
+      "generation_seconds": 397.9894162379205,
+      "seconds": 46271.88308152463,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 61,
+      "loss": 0.28759700588701215,
+      "lr": 7.284030952540937e-06,
+      "grad_norm": 0.9737362265586853,
+      "tokens": 67764,
+      "total_tokens": 3097886,
+      "on_policy_examples": 32,
+      "generation_seconds": 1039.8472356200218,
+      "seconds": 47348.62125327904,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 62,
+      "loss": 0.3707937489442454,
+      "lr": 7.189749867199899e-06,
+      "grad_norm": 1.2628356218338013,
+      "tokens": 46342,
+      "total_tokens": 3144228,
+      "on_policy_examples": 32,
+      "generation_seconds": 663.6638283235952,
+      "seconds": 48038.2937584538,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 63,
+      "loss": 0.4952959206133686,
+      "lr": 7.094495349838093e-06,
+      "grad_norm": 1.739702582359314,
+      "tokens": 36727,
+      "total_tokens": 3180955,
+      "on_policy_examples": 32,
+      "generation_seconds": 205.71595423761755,
+      "seconds": 48263.92929336894,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 64,
+      "loss": 0.5497474252676287,
+      "lr": 6.998309744925411e-06,
+      "grad_norm": 2.0054032802581787,
+      "tokens": 25204,
+      "total_tokens": 3206159,
+      "on_policy_examples": 32,
+      "generation_seconds": 131.71114567108452,
+      "seconds": 48410.20137141179,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 65,
+      "loss": 0.3064797212157457,
+      "lr": 6.901235810837668e-06,
+      "grad_norm": 1.30549156665802,
+      "tokens": 42209,
+      "total_tokens": 3248368,
+      "on_policy_examples": 32,
+      "generation_seconds": 618.1722370479256,
+      "seconds": 49052.37705368735,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 66,
+      "loss": 0.31993295619915263,
+      "lr": 6.8033167008487784e-06,
+      "grad_norm": 1.1189547777175903,
+      "tokens": 50104,
+      "total_tokens": 3298472,
+      "on_policy_examples": 32,
+      "generation_seconds": 702.3099764185026,
+      "seconds": 49783.11492130533,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 67,
+      "loss": 0.5471158771512491,
+      "lr": 6.704595943947385e-06,
+      "grad_norm": 2.1680757999420166,
+      "tokens": 23827,
+      "total_tokens": 3322299,
+      "on_policy_examples": 32,
+      "generation_seconds": 116.07257890235633,
+      "seconds": 49912.111232227646,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 68,
+      "loss": 0.5635420463332654,
+      "lr": 6.605117425486483e-06,
+      "grad_norm": 2.0811069011688232,
+      "tokens": 28208,
+      "total_tokens": 3350507,
+      "on_policy_examples": 32,
+      "generation_seconds": 165.5640954915434,
+      "seconds": 50093.55598503258,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 69,
+      "loss": 0.3231548902144128,
+      "lr": 6.504925367674595e-06,
+      "grad_norm": 1.0995954275131226,
+      "tokens": 50623,
+      "total_tokens": 3401130,
+      "on_policy_examples": 32,
+      "generation_seconds": 668.5331298774108,
+      "seconds": 50790.694204240106,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 70,
+      "loss": 0.34155474094850474,
+      "lr": 6.40406430991723e-06,
+      "grad_norm": 1.275007724761963,
+      "tokens": 48729,
+      "total_tokens": 3449859,
+      "on_policy_examples": 32,
+      "generation_seconds": 666.8003835799173,
+      "seconds": 51484.54531733971,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 71,
+      "loss": 0.5610663153238717,
+      "lr": 6.302579089017328e-06,
+      "grad_norm": 2.2107322216033936,
+      "tokens": 24595,
+      "total_tokens": 3474454,
+      "on_policy_examples": 32,
+      "generation_seconds": 149.74200792703778,
+      "seconds": 51648.48712943401,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 72,
+      "loss": 0.3442672135255962,
+      "lr": 6.200514819243476e-06,
+      "grad_norm": 1.2598530054092407,
+      "tokens": 45373,
+      "total_tokens": 3519827,
+      "on_policy_examples": 32,
+      "generation_seconds": 661.6797357313335,
+      "seconds": 52336.04424910154,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 73,
+      "loss": 0.3516987402659234,
+      "lr": 6.097916872274815e-06,
+      "grad_norm": 1.2747334241867065,
+      "tokens": 45503,
+      "total_tokens": 3565330,
+      "on_policy_examples": 32,
+      "generation_seconds": 661.9024839960039,
+      "seconds": 53022.7068566503,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 74,
+      "loss": 0.23065950145555844,
+      "lr": 5.9948308570315e-06,
+      "grad_norm": 0.9055444598197937,
+      "tokens": 57477,
+      "total_tokens": 3622807,
+      "on_policy_examples": 32,
+      "generation_seconds": 981.1122664194554,
+      "seconds": 54035.93199884053,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 75,
+      "loss": 0.3370259026294236,
+      "lr": 5.891302599399686e-06,
+      "grad_norm": 1.2829548120498657,
+      "tokens": 42917,
+      "total_tokens": 3665724,
+      "on_policy_examples": 32,
+      "generation_seconds": 640.4312626868486,
+      "seconds": 54701.092394870706,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 76,
+      "loss": 0.3421275278240288,
+      "lr": 5.78737812186009e-06,
+      "grad_norm": 1.280356764793396,
+      "tokens": 44603,
+      "total_tokens": 3710327,
+      "on_policy_examples": 32,
+      "generation_seconds": 665.0837112497538,
+      "seconds": 55392.046082645655,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 77,
+      "loss": 0.302474524585793,
+      "lr": 5.6831036230291345e-06,
+      "grad_norm": 1.0990421772003174,
+      "tokens": 51731,
+      "total_tokens": 3762058,
+      "on_policy_examples": 32,
+      "generation_seconds": 754.9668670045212,
+      "seconds": 56174.4571420718,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 78,
+      "loss": 0.521985969206117,
+      "lr": 5.578525457121807e-06,
+      "grad_norm": 1.8224486112594604,
+      "tokens": 27705,
+      "total_tokens": 3789763,
+      "on_policy_examples": 32,
+      "generation_seconds": 177.09053158387542,
+      "seconds": 56368.04632185865,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 79,
+      "loss": 0.3349812005991764,
+      "lr": 5.473690113345343e-06,
+      "grad_norm": 1.3253813982009888,
+      "tokens": 47106,
+      "total_tokens": 3836869,
+      "on_policy_examples": 32,
+      "generation_seconds": 653.8033902607858,
+      "seconds": 57047.33280286752,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 80,
+      "loss": 0.21095644953162615,
+      "lr": 5.368644195232896e-06,
+      "grad_norm": 0.7486313581466675,
+      "tokens": 76845,
+      "total_tokens": 3913714,
+      "on_policy_examples": 32,
+      "generation_seconds": 1478.8619178440422,
+      "seconds": 58569.0146245081,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 81,
+      "loss": 0.24514804873796736,
+      "lr": 5.2634343999263985e-06,
+      "grad_norm": 0.8958818912506104,
+      "tokens": 62694,
+      "total_tokens": 3976408,
+      "on_policy_examples": 32,
+      "generation_seconds": 1007.9212960898876,
+      "seconds": 59611.09010508843,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 82,
+      "loss": 0.3843843565507196,
+      "lr": 5.158107497417795e-06,
+      "grad_norm": 1.3837777376174927,
+      "tokens": 40255,
+      "total_tokens": 4016663,
+      "on_policy_examples": 32,
+      "generation_seconds": 611.5138774383813,
+      "seconds": 60244.796471561305,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 83,
+      "loss": 0.4518194625963787,
+      "lr": 5.052710309757899e-06,
+      "grad_norm": 1.6022368669509888,
+      "tokens": 33786,
+      "total_tokens": 4050449,
+      "on_policy_examples": 32,
+      "generation_seconds": 233.46378270350397,
+      "seconds": 60498.725654385984,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 84,
+      "loss": 0.4391896750054617,
+      "lr": 4.947289690242103e-06,
+      "grad_norm": 1.5591881275177002,
+      "tokens": 40624,
+      "total_tokens": 4091073,
+      "on_policy_examples": 32,
+      "generation_seconds": 321.5994279580191,
+      "seconds": 60842.86736498959,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 85,
+      "loss": 0.5095233723448646,
+      "lr": 4.841892502582206e-06,
+      "grad_norm": 2.019174814224243,
+      "tokens": 28740,
+      "total_tokens": 4119813,
+      "on_policy_examples": 32,
+      "generation_seconds": 175.26871677674353,
+      "seconds": 61033.81700673979,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 86,
+      "loss": 0.24017639595346274,
+      "lr": 4.736565600073602e-06,
+      "grad_norm": 0.8593531250953674,
+      "tokens": 62411,
+      "total_tokens": 4182224,
+      "on_policy_examples": 32,
+      "generation_seconds": 1016.4596064714715,
+      "seconds": 62084.99836154934,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 87,
+      "loss": 0.49648801373825346,
+      "lr": 4.631355804767106e-06,
+      "grad_norm": 1.6534494161605835,
+      "tokens": 32749,
+      "total_tokens": 4214973,
+      "on_policy_examples": 32,
+      "generation_seconds": 219.74853386636823,
+      "seconds": 62324.35962875467,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 88,
+      "loss": 0.19183703930910073,
+      "lr": 4.526309886654659e-06,
+      "grad_norm": 0.7316409945487976,
+      "tokens": 76018,
+      "total_tokens": 4290991,
+      "on_policy_examples": 32,
+      "generation_seconds": 1452.4345879554749,
+      "seconds": 63818.95849204436,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 89,
+      "loss": 0.16971654607987854,
+      "lr": 4.4214745428781946e-06,
+      "grad_norm": 0.5866907238960266,
+      "tokens": 95710,
+      "total_tokens": 4386701,
+      "on_policy_examples": 32,
+      "generation_seconds": 1833.3353481143713,
+      "seconds": 65704.63714895304,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 90,
+      "loss": 0.31804827300847305,
+      "lr": 4.316896376970866e-06,
+      "grad_norm": 1.1093593835830688,
+      "tokens": 46954,
+      "total_tokens": 4433655,
+      "on_policy_examples": 32,
+      "generation_seconds": 678.675861841999,
+      "seconds": 66409.95456835907,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 91,
+      "loss": 0.3201517099427608,
+      "lr": 4.212621878139912e-06,
+      "grad_norm": 1.1463679075241089,
+      "tokens": 43357,
+      "total_tokens": 4477012,
+      "on_policy_examples": 32,
+      "generation_seconds": 635.0767028685659,
+      "seconds": 67070.28764365148,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 92,
+      "loss": 0.4992112721777675,
+      "lr": 4.108697400600316e-06,
+      "grad_norm": 1.7787609100341797,
+      "tokens": 31852,
+      "total_tokens": 4508864,
+      "on_policy_examples": 32,
+      "generation_seconds": 187.93463419750333,
+      "seconds": 67277.42874379549,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 93,
+      "loss": 0.362613755386558,
+      "lr": 4.005169142968503e-06,
+      "grad_norm": 1.3205617666244507,
+      "tokens": 42184,
+      "total_tokens": 4551048,
+      "on_policy_examples": 32,
+      "generation_seconds": 619.6796659566462,
+      "seconds": 67921.07756802719,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 94,
+      "loss": 0.2657727023305679,
+      "lr": 3.902083127725186e-06,
+      "grad_norm": 0.8460001945495605,
+      "tokens": 63533,
+      "total_tokens": 4614581,
+      "on_policy_examples": 32,
+      "generation_seconds": 1039.5123624838889,
+      "seconds": 68995.58500363026,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 95,
+      "loss": 0.5383612517202986,
+      "lr": 3.799485180756526e-06,
+      "grad_norm": 1.8760430812835693,
+      "tokens": 28656,
+      "total_tokens": 4643237,
+      "on_policy_examples": 32,
+      "generation_seconds": 165.61110576242208,
+      "seconds": 69177.95365075022,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 96,
+      "loss": 0.15941450920986605,
+      "lr": 3.6974209109826724e-06,
+      "grad_norm": 7.06724739074707,
+      "tokens": 88788,
+      "total_tokens": 4732025,
+      "on_policy_examples": 32,
+      "generation_seconds": 1842.2961497511715,
+      "seconds": 71069.33788308501,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 97,
+      "loss": 0.5782798877895786,
+      "lr": 3.595935690082769e-06,
+      "grad_norm": 2.112276315689087,
+      "tokens": 22584,
+      "total_tokens": 4754609,
+      "on_policy_examples": 32,
+      "generation_seconds": 119.63789990916848,
+      "seconds": 71201.68549200892,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 98,
+      "loss": 0.35706470795689954,
+      "lr": 3.495074632325407e-06,
+      "grad_norm": 1.2441033124923706,
+      "tokens": 43867,
+      "total_tokens": 4798476,
+      "on_policy_examples": 32,
+      "generation_seconds": 637.1988704679534,
+      "seconds": 71863.76166601945,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 99,
+      "loss": 0.49111919837901374,
+      "lr": 3.3948825745135196e-06,
+      "grad_norm": 1.6873090267181396,
+      "tokens": 33074,
+      "total_tokens": 4831550,
+      "on_policy_examples": 32,
+      "generation_seconds": 216.54054998327047,
+      "seconds": 72099.03857116494,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 100,
+      "loss": 0.5619119442868136,
+      "lr": 3.295404056052616e-06,
+      "grad_norm": 2.0523416996002197,
+      "tokens": 28388,
+      "total_tokens": 4859938,
+      "on_policy_examples": 32,
+      "generation_seconds": 170.93366407044232,
+      "seconds": 72286.78397043422,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 101,
+      "loss": 0.31582646517648555,
+      "lr": 3.1966832991512232e-06,
+      "grad_norm": 1.214180588722229,
+      "tokens": 41126,
+      "total_tokens": 4901064,
+      "on_policy_examples": 32,
+      "generation_seconds": 626.7304652994499,
+      "seconds": 72951.52614698559,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 102,
+      "loss": 0.559419203154245,
+      "lr": 3.098764189162332e-06,
+      "grad_norm": 1.7369974851608276,
+      "tokens": 32591,
+      "total_tokens": 4933655,
+      "on_policy_examples": 32,
+      "generation_seconds": 206.5865585403517,
+      "seconds": 73176.19027463347,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 103,
+      "loss": 0.5610950807033716,
+      "lr": 3.0016902550745896e-06,
+      "grad_norm": 1.8869991302490234,
+      "tokens": 28520,
+      "total_tokens": 4962175,
+      "on_policy_examples": 32,
+      "generation_seconds": 197.28810290433466,
+      "seconds": 73389.69216042943,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 104,
+      "loss": 0.35119455420473716,
+      "lr": 2.9055046501619088e-06,
+      "grad_norm": 1.149489164352417,
+      "tokens": 47161,
+      "total_tokens": 5009336,
+      "on_policy_examples": 32,
+      "generation_seconds": 659.2692172210664,
+      "seconds": 74075.3063581679,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 105,
+      "loss": 0.2173051147006315,
+      "lr": 2.810250132800103e-06,
+      "grad_norm": 0.8525952100753784,
+      "tokens": 59072,
+      "total_tokens": 5068408,
+      "on_policy_examples": 32,
+      "generation_seconds": 1000.7815815312788,
+      "seconds": 75110.41418295726,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 106,
+      "loss": 0.3446712337945476,
+      "lr": 2.715969047459066e-06,
+      "grad_norm": 1.2111104726791382,
+      "tokens": 45008,
+      "total_tokens": 5113416,
+      "on_policy_examples": 32,
+      "generation_seconds": 657.0936069348827,
+      "seconds": 75792.46568480879,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 107,
+      "loss": 0.3512956411795603,
+      "lr": 2.622703305878941e-06,
+      "grad_norm": 1.1368911266326904,
+      "tokens": 48652,
+      "total_tokens": 5162068,
+      "on_policy_examples": 32,
+      "generation_seconds": 670.2646828265861,
+      "seconds": 76489.93833062239,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 108,
+      "loss": 0.501891668465659,
+      "lr": 2.530494368438683e-06,
+      "grad_norm": 1.8070271015167236,
+      "tokens": 29259,
+      "total_tokens": 5191327,
+      "on_policy_examples": 32,
+      "generation_seconds": 197.19472213368863,
+      "seconds": 76703.80762899294,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 109,
+      "loss": 0.29500635653427476,
+      "lr": 2.4393832257252253e-06,
+      "grad_norm": 1.0786280632019043,
+      "tokens": 48289,
+      "total_tokens": 5239616,
+      "on_policy_examples": 32,
+      "generation_seconds": 665.281177370809,
+      "seconds": 77396.98202987481,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 110,
+      "loss": 0.3174399253384746,
+      "lr": 2.349410380311532e-06,
+      "grad_norm": 1.1449793577194214,
+      "tokens": 45796,
+      "total_tokens": 5285412,
+      "on_policy_examples": 32,
+      "generation_seconds": 675.895755819045,
+      "seconds": 78098.9591949163,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 111,
+      "loss": 0.3411442031221242,
+      "lr": 2.2606158287515662e-06,
+      "grad_norm": 1.1458454132080078,
+      "tokens": 50257,
+      "total_tokens": 5335669,
+      "on_policy_examples": 32,
+      "generation_seconds": 688.8162957159802,
+      "seconds": 78816.33509834111,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 112,
+      "loss": 0.2888648385371846,
+      "lr": 2.1730390438002056e-06,
+      "grad_norm": 0.8825441598892212,
+      "tokens": 72191,
+      "total_tokens": 5407860,
+      "on_policy_examples": 32,
+      "generation_seconds": 1063.064537013881,
+      "seconds": 79918.19033752568,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 113,
+      "loss": 0.27592851634973,
+      "lr": 2.086718956866024e-06,
+      "grad_norm": 0.9694786667823792,
+      "tokens": 54910,
+      "total_tokens": 5462770,
+      "on_policy_examples": 32,
+      "generation_seconds": 838.1354385968298,
+      "seconds": 80786.2720844103,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 114,
+      "loss": 0.5478852864531017,
+      "lr": 2.0016939407046987e-06,
+      "grad_norm": 2.006377696990967,
+      "tokens": 24889,
+      "total_tokens": 5487659,
+      "on_policy_examples": 32,
+      "generation_seconds": 149.81272689811885,
+      "seconds": 80950.72230532952,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 115,
+      "loss": 0.3418809405754555,
+      "lr": 1.9180017923607884e-06,
+      "grad_norm": 1.1501020193099976,
+      "tokens": 49348,
+      "total_tokens": 5537007,
+      "on_policy_examples": 32,
+      "generation_seconds": 664.276928906329,
+      "seconds": 81642.19162223581,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 116,
+      "loss": 0.5208622081939279,
+      "lr": 1.8356797163654172e-06,
+      "grad_norm": 1.7490150928497314,
+      "tokens": 33681,
+      "total_tokens": 5570688,
+      "on_policy_examples": 32,
+      "generation_seconds": 181.04535649623722,
+      "seconds": 81841.95276708808,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 117,
+      "loss": 0.19310057304892977,
+      "lr": 1.754764308197358e-06,
+      "grad_norm": 0.6759909391403198,
+      "tokens": 79274,
+      "total_tokens": 5649962,
+      "on_policy_examples": 32,
+      "generation_seconds": 1505.923757479526,
+      "seconds": 83391.62785367388,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 118,
+      "loss": 0.3219376328053087,
+      "lr": 1.6752915380148772e-06,
+      "grad_norm": 1.162911057472229,
+      "tokens": 46986,
+      "total_tokens": 5696948,
+      "on_policy_examples": 32,
+      "generation_seconds": 666.4745363844559,
+      "seconds": 84083.83219633624,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 119,
+      "loss": 0.5343281467974603,
+      "lr": 1.5972967346655449e-06,
+      "grad_norm": 1.7624356746673584,
+      "tokens": 32302,
+      "total_tokens": 5729250,
+      "on_policy_examples": 32,
+      "generation_seconds": 176.61822364013642,
+      "seconds": 84277.7354875952,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 120,
+      "loss": 0.2267514325119059,
+      "lr": 1.5208145699811417e-06,
+      "grad_norm": 0.852872371673584,
+      "tokens": 56350,
+      "total_tokens": 5785600,
+      "on_policy_examples": 32,
+      "generation_seconds": 991.2947827894241,
+      "seconds": 85299.80463697389,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 121,
+      "loss": 0.3277635519091514,
+      "lr": 1.4458790433646264e-06,
+      "grad_norm": 1.3669016361236572,
+      "tokens": 42808,
+      "total_tokens": 5828408,
+      "on_policy_examples": 32,
+      "generation_seconds": 665.2668200489134,
+      "seconds": 85989.59296034742,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 122,
+      "loss": 0.5151001431831606,
+      "lr": 1.3725234666760428e-06,
+      "grad_norm": 1.6539347171783447,
+      "tokens": 35661,
+      "total_tokens": 5864069,
+      "on_policy_examples": 32,
+      "generation_seconds": 229.3156581139192,
+      "seconds": 86237.3659014497,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 123,
+      "loss": 0.3348076861298441,
+      "lr": 1.3007804494240478e-06,
+      "grad_norm": 1.1303976774215698,
+      "tokens": 49216,
+      "total_tokens": 5913285,
+      "on_policy_examples": 32,
+      "generation_seconds": 671.2758487770334,
+      "seconds": 86937.03206543997,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 124,
+      "loss": 0.34267295719934365,
+      "lr": 1.2306818842696716e-06,
+      "grad_norm": 1.1948882341384888,
+      "tokens": 45594,
+      "total_tokens": 5958879,
+      "on_policy_examples": 32,
+      "generation_seconds": 687.7078178664669,
+      "seconds": 87651.30632539466,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 125,
+      "loss": 0.32095242217109743,
+      "lr": 1.1622589328487505e-06,
+      "grad_norm": 1.3338961601257324,
+      "tokens": 43667,
+      "total_tokens": 6002546,
+      "on_policy_examples": 32,
+      "generation_seconds": 673.4860804500058,
+      "seconds": 88350.87700352632,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 126,
+      "loss": 0.4634196262866688,
+      "lr": 1.09554201191932e-06,
+      "grad_norm": 1.6997989416122437,
+      "tokens": 29227,
+      "total_tokens": 6031773,
+      "on_policy_examples": 32,
+      "generation_seconds": 167.47091461345553,
+      "seconds": 88535.96514134016,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 127,
+      "loss": 0.3350809670368135,
+      "lr": 1.03056077984014e-06,
+      "grad_norm": 1.2285932302474976,
+      "tokens": 46073,
+      "total_tokens": 6077846,
+      "on_policy_examples": 32,
+      "generation_seconds": 673.3026094697416,
+      "seconds": 89234.78767422959,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 128,
+      "loss": 0.33230897474694704,
+      "lr": 9.673441233863661e-07,
+      "grad_norm": 1.147957682609558,
+      "tokens": 49122,
+      "total_tokens": 6126968,
+      "on_policy_examples": 32,
+      "generation_seconds": 671.7325398596004,
+      "seconds": 89934.11387648433,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 129,
+      "loss": 0.5074251417868183,
+      "lr": 9.059201449082045e-07,
+      "grad_norm": 1.7513012886047363,
+      "tokens": 29520,
+      "total_tokens": 6156488,
+      "on_policy_examples": 32,
+      "generation_seconds": 171.6756795849651,
+      "seconds": 90121.7205445189,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 130,
+      "loss": 0.552553304280726,
+      "lr": 8.463161498382949e-07,
+      "grad_norm": 1.9475747346878052,
+      "tokens": 24987,
+      "total_tokens": 6181475,
+      "on_policy_examples": 32,
+      "generation_seconds": 144.8875832259655,
+      "seconds": 90281.21557893977,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 131,
+      "loss": 0.48477265317433355,
+      "lr": 7.885586345533397e-07,
+      "grad_norm": 1.6747198104858398,
+      "tokens": 31783,
+      "total_tokens": 6213258,
+      "on_policy_examples": 32,
+      "generation_seconds": 260.5051699830219,
+      "seconds": 90559.23484009597,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 132,
+      "loss": 0.5570328407670887,
+      "lr": 7.326732745954001e-07,
+      "grad_norm": 1.7964004278182983,
+      "tokens": 29559,
+      "total_tokens": 6242817,
+      "on_policy_examples": 32,
+      "generation_seconds": 173.21431598439813,
+      "seconds": 90747.57965812739,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 133,
+      "loss": 0.25368304703938743,
+      "lr": 6.786849132580841e-07,
+      "grad_norm": 0.8845165371894836,
+      "tokens": 59822,
+      "total_tokens": 6302639,
+      "on_policy_examples": 32,
+      "generation_seconds": 1006.53116909042,
+      "seconds": 91788.07285313122,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 134,
+      "loss": 0.3218389632053357,
+      "lr": 6.266175505426958e-07,
+      "grad_norm": 1.1073591709136963,
+      "tokens": 46223,
+      "total_tokens": 6348862,
+      "on_policy_examples": 32,
+      "generation_seconds": 660.4278925899416,
+      "seconds": 92474.36143918894,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 135,
+      "loss": 0.5205656054380847,
+      "lr": 5.76494332489278e-07,
+      "grad_norm": 1.7614433765411377,
+      "tokens": 30572,
+      "total_tokens": 6379434,
+      "on_policy_examples": 32,
+      "generation_seconds": 203.98166042752564,
+      "seconds": 92695.07150872238,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 136,
+      "loss": 0.33336633610201016,
+      "lr": 5.283375408872538e-07,
+      "grad_norm": 1.1122260093688965,
+      "tokens": 50695,
+      "total_tokens": 6430129,
+      "on_policy_examples": 32,
+      "generation_seconds": 765.8114140396938,
+      "seconds": 93488.47280175425,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 137,
+      "loss": 0.3311333093294616,
+      "lr": 4.82168583370285e-07,
+      "grad_norm": 1.2018506526947021,
+      "tokens": 47496,
+      "total_tokens": 6477625,
+      "on_policy_examples": 32,
+      "generation_seconds": 684.2973119085655,
+      "seconds": 94200.04937260319,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 138,
+      "loss": 0.24571881574338125,
+      "lr": 4.380079838997087e-07,
+      "grad_norm": 0.9187737703323364,
+      "tokens": 55432,
+      "total_tokens": 6533057,
+      "on_policy_examples": 32,
+      "generation_seconds": 989.7599753253162,
+      "seconds": 95221.16318511404,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 139,
+      "loss": 0.5199567387196337,
+      "lr": 3.958753736408105e-07,
+      "grad_norm": 1.6035488843917847,
+      "tokens": 34974,
+      "total_tokens": 6568031,
+      "on_policy_examples": 32,
+      "generation_seconds": 194.59356400277466,
+      "seconds": 95434.87177787069,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 140,
+      "loss": 0.31019644088074727,
+      "lr": 3.557894822359864e-07,
+      "grad_norm": 1.1781750917434692,
+      "tokens": 52578,
+      "total_tokens": 6620609,
+      "on_policy_examples": 32,
+      "generation_seconds": 749.1829225430265,
+      "seconds": 96211.95420445502,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 141,
+      "loss": 0.32779384208183077,
+      "lr": 3.177681294786539e-07,
+      "grad_norm": 1.2453325986862183,
+      "tokens": 39706,
+      "total_tokens": 6660315,
+      "on_policy_examples": 32,
+      "generation_seconds": 613.3712908523157,
+      "seconds": 96847.29672680423,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 142,
+      "loss": 0.5350122742290508,
+      "lr": 2.8182821739164534e-07,
+      "grad_norm": 1.8186858892440796,
+      "tokens": 28593,
+      "total_tokens": 6688908,
+      "on_policy_examples": 32,
+      "generation_seconds": 186.8588728038594,
+      "seconds": 97050.64970804472,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 143,
+      "loss": 0.26329843459232166,
+      "lr": 2.479857227135685e-07,
+      "grad_norm": 0.9820171594619751,
+      "tokens": 51470,
+      "total_tokens": 6740378,
+      "on_policy_examples": 32,
+      "generation_seconds": 877.9915527300909,
+      "seconds": 97956.68674915656,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 144,
+      "loss": 0.3543308726309973,
+      "lr": 2.1625568979651012e-07,
+      "grad_norm": 1.2421036958694458,
+      "tokens": 46607,
+      "total_tokens": 6786985,
+      "on_policy_examples": 32,
+      "generation_seconds": 656.3536395439878,
+      "seconds": 98638.58116907254,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 145,
+      "loss": 0.5662937668854837,
+      "lr": 1.866522239182117e-07,
+      "grad_norm": 2.0563175678253174,
+      "tokens": 24383,
+      "total_tokens": 6811368,
+      "on_policy_examples": 32,
+      "generation_seconds": 129.83719911798835,
+      "seconds": 98783.0509876376,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 146,
+      "loss": 0.3456176481800049,
+      "lr": 1.5918848501170647e-07,
+      "grad_norm": 1.2075246572494507,
+      "tokens": 46106,
+      "total_tokens": 6857474,
+      "on_policy_examples": 32,
+      "generation_seconds": 651.9603090239689,
+      "seconds": 99460.25005974807,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 147,
+      "loss": 0.3399006251956996,
+      "lr": 1.338766818151982e-07,
+      "grad_norm": 1.2025429010391235,
+      "tokens": 45410,
+      "total_tokens": 6902884,
+      "on_policy_examples": 32,
+      "generation_seconds": 678.7328386781737,
+      "seconds": 100164.07880785968,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 148,
+      "loss": 0.5459353076299586,
+      "lr": 1.107280664447874e-07,
+      "grad_norm": 1.7561885118484497,
+      "tokens": 28675,
+      "total_tokens": 6931559,
+      "on_policy_examples": 32,
+      "generation_seconds": 155.87393635418266,
+      "seconds": 100335.29736019578,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 149,
+      "loss": 0.4547726049972521,
+      "lr": 8.975292939244928e-08,
+      "grad_norm": 1.692811131477356,
+      "tokens": 29966,
+      "total_tokens": 6961525,
+      "on_policy_examples": 32,
+      "generation_seconds": 314.0098117608577,
+      "seconds": 100666.51041921321,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 150,
+      "loss": 0.36649366591345844,
+      "lr": 7.096059495149855e-08,
+      "grad_norm": 1.2971168756484985,
+      "tokens": 42784,
+      "total_tokens": 7004309,
+      "on_policy_examples": 32,
+      "generation_seconds": 640.1925154710189,
+      "seconds": 101330.85105800815,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 151,
+      "loss": 0.5897345625954478,
+      "lr": 5.435941707156389e-08,
+      "grad_norm": 2.138317584991455,
+      "tokens": 23082,
+      "total_tokens": 7027391,
+      "on_policy_examples": 32,
+      "generation_seconds": 126.83402331266552,
+      "seconds": 101487.04727576207,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 152,
+      "loss": 0.5515109682809829,
+      "lr": 3.99567756449204e-08,
+      "grad_norm": 1.9163528680801392,
+      "tokens": 28084,
+      "total_tokens": 7055475,
+      "on_policy_examples": 32,
+      "generation_seconds": 158.33168184850365,
+      "seconds": 101661.75769677293,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 153,
+      "loss": 0.4948174977580861,
+      "lr": 2.77590732258326e-08,
+      "grad_norm": 1.4650893211364746,
+      "tokens": 41120,
+      "total_tokens": 7096595,
+      "on_policy_examples": 32,
+      "generation_seconds": 262.7298414045945,
+      "seconds": 101947.52419646922,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 154,
+      "loss": 0.35230468481000293,
+      "lr": 1.7771732184357905e-08,
+      "grad_norm": 1.3392316102981567,
+      "tokens": 41749,
+      "total_tokens": 7138344,
+      "on_policy_examples": 32,
+      "generation_seconds": 620.6082487525418,
+      "seconds": 102592.47697409429,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 155,
+      "loss": 0.3402420427120958,
+      "lr": 9.999192295886973e-09,
+      "grad_norm": 1.1966828107833862,
+      "tokens": 43605,
+      "total_tokens": 7181949,
+      "on_policy_examples": 32,
+      "generation_seconds": 624.039107773453,
+      "seconds": 103240.79674133845,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 156,
+      "loss": 0.35873079508760547,
+      "lr": 4.444908767484712e-09,
+      "grad_norm": 1.2327557802200317,
+      "tokens": 43840,
+      "total_tokens": 7225789,
+      "on_policy_examples": 32,
+      "generation_seconds": 662.5502131786197,
+      "seconds": 103928.35995846055,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    },
+    {
+      "step": 157,
+      "loss": 0.16133027785617166,
+      "lr": 1.111350701909486e-09,
+      "grad_norm": 1.4345781803131104,
+      "tokens": 23018,
+      "total_tokens": 7248807,
+      "on_policy_examples": 8,
+      "generation_seconds": 557.4782986752689,
+      "seconds": 104499.92344240565,
+      "peak_memory_gb": [
+        13.741650944,
+        9.399537152
+      ]
+    }
+  ],
+  "metadata": {
+    "config": {
+      "seed": 20261117,
+      "student": "/home/data1/Model/Qwen3/post-training/Qwen3-0.6B",
+      "teacher": "/home/data1/Model/Qwen3/post-training/Qwen3-4B",
+      "train_size": 5000,
+      "validation_size": 200,
+      "max_prompt_tokens": 512,
+      "max_completion_tokens": 16384,
+      "eval_max_new_tokens": 16384,
+      "micro_batch_size": 32,
+      "effective_batch_size": 32,
+      "learning_rate": 1e-05,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.05,
+      "max_grad_norm": 1.0,
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "kd_temperature": 1.0,
+      "loss_chunk_size": 128,
+      "eval_batch_size": 16,
+      "generation_batch_size": 16,
+      "arc_size": 400,
+      "max_training_batch_tokens": 8192,
+      "max_generation_batch_tokens": 20000
+    },
+    "experiment": "E4",
+    "lambda": 1.0,
+    "beta": 0,
+    "trainable_parameters": 596049920,
+    "precision": "FP32 master parameters and AdamW states; BF16 autocast activations",
+    "git_commit": "2160b8f0f974d85dc0823cb48cc4d22c3daabab9",
+    "versions": {
+      "torch": "2.5.1+cu124",
+      "transformers": "4.57.1",
+      "trl": "0.24.0",
+      "datasets": "4.3.0",
+      "lm_eval": "0.4.9.2",
+      "accelerate": "1.10.1"
+    },
+    "cuda_visible_devices": "2,3",
+    "gpus": [
+      "NVIDIA GeForce RTX 3090",
+      "NVIDIA GeForce RTX 3090"
+    ]
+  },
+  "weight_update_check": {
+    "method": "Compared every saved parameter tensor with the matching initial tensor in FP32; stopped scanning each tensor after its first differing element.",
+    "matching_shapes": true,
+    "parameter_tensors_with_an_observed_update": 310,
+    "saved_parameter_tensors": 310,
+    "trainable_parameters": 596049920
+  }
+}

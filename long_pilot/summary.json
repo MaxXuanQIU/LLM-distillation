@@ -1,0 +1,27 @@
+{
+  "ceiling": 16384,
+  "validation_sample_size": 64,
+  "sample_seed": 20261117,
+  "models": {
+    "teacher": {
+      "count": 64,
+      "ended_with_eos": 64,
+      "median_tokens": 807.5,
+      "longest_tokens": 7744
+    },
+    "student": {
+      "count": 64,
+      "ended_with_eos": 64,
+      "median_tokens": 568.5,
+      "longest_tokens": 2909
+    }
+  },
+  "optimizer_probe": {
+    "response_tokens": 16384,
+    "prompt_tokens": 483,
+    "peak_gb": [
+      11.373819904,
+      9.400965632
+    ]
+  }
+}
