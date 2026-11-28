@@ -32,6 +32,19 @@ def evaluate_arc(model, tok, rows):
     return records
 
 
+def score_ifeval_batch(model, tok, batch, cfg):
+    completions = generate(model, tok, batch, cfg["eval_max_new_tokens"], cfg, sample=False)
+    for row, comp in zip(batch, completions):
+        response = tok.decode(comp, skip_special_tokens=True)
+        # Deterministic language detection for the language constraints.
+        from langdetect import DetectorFactory
+        DetectorFactory.seed = 0
+        metrics = process_results(row, [response])
+        rec = {"id": row["id"], "prompt": row["prompt"], "response": response,
+               "completion_tokens": len(comp), "truncated": comp[-1] != tok.eos_token_id, **metrics}
+        yield rec
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--name", choices=["Teacher", "E0", "E1", "E2", "E3", "E4"], required=True)
@@ -56,15 +69,7 @@ def main():
     with file.open("a") as f:
         for offset in range(0, len(remaining), cfg["eval_batch_size"]):
             batch = remaining[offset:offset+cfg["eval_batch_size"]]
-            completions = generate(model, tok, batch, cfg["eval_max_new_tokens"], cfg, sample=False)
-            for row, comp in zip(batch, completions):
-                response = tok.decode(comp, skip_special_tokens=True)
-                # Deterministic language detection for the language constraints.
-                from langdetect import DetectorFactory
-                DetectorFactory.seed = 0
-                metrics = process_results(row, [response])
-                rec = {"id": row["id"], "prompt": row["prompt"], "response": response,
-                       "completion_tokens": len(comp), "truncated": comp[-1] != tok.eos_token_id, **metrics}
+            for rec in score_ifeval_batch(model, tok, batch, cfg):
                 records.append(rec)
                 f.write(json.dumps(rec, ensure_ascii=False) + "\n")
             f.flush()
